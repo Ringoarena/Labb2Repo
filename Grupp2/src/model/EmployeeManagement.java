@@ -1,7 +1,7 @@
 package model;
 
+import UI.Utilities;
 import model.employees.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,14 +10,14 @@ public class EmployeeManagement {
     private static ArrayList<Employee> employeeDB = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
-    public static void loadDB(){
+    public static void loadDB() {
         employeeDB.add(new Waiter("Rikard", "1990-09-25", GenderType.MALE));
         employeeDB.add(new Waiter("Johannes", "1930-09-25", GenderType.MALE));
         employeeDB.add(new Waiter("Mattias", "1200-09-25", GenderType.MALE));
     }
 
     public static void addEmployee(){
-
+        //test
         System.out.println("Enter employee name");
         String name = sc.nextLine();
 
@@ -25,21 +25,11 @@ public class EmployeeManagement {
         System.out.println("Enter DOB (yyyy-mm-dd)");
         String dob = sc.nextLine();
 
-        int gender;
-        while (true) {
-            System.out.println("Enter employee gender");
-            System.out.println("1. Female");
-            System.out.println("2. Male");
-            System.out.println("3. Other");
-            try {
-                gender = Integer.parseInt(sc.nextLine());
-                if (gender >= 1 && gender <= 3) {
-                    break;
-                } else {
-                    System.out.println("Enter a number from 1 to 3 only!");
-                }
-            } catch (NumberFormatException ignored) {}
-        }
+        System.out.println("Enter employee gender");
+        System.out.println("1. Female");
+        System.out.println("2. Male");
+        System.out.println("3. Other");
+        int gender = Utilities.getInput(1,3);
 
         GenderType newEmployeeGender = null;
         switch(gender) {
@@ -57,23 +47,14 @@ public class EmployeeManagement {
                 break;
         }
 
-        int role;
-        while (true){
-            System.out.println("Enter employee role");
-            System.out.println("1. Manager");
-            System.out.println("2. HR");
-            System.out.println("3. Chef");
-            System.out.println("4. Bartender");
-            System.out.println("5. Waiter");
-            try {
-                 role = Integer.parseInt(sc.nextLine());
-                if (role >= 1 && role <= 5) {
-                    break;
-                } else {
-                    System.out.println("Enter a number from 1 to 5 only!");
-                }
-            } catch (NumberFormatException ignored) { }
-        }
+        System.out.println("Enter employee role");
+        System.out.println("1. Manager");
+        System.out.println("2. HR");
+        System.out.println("3. Chef");
+        System.out.println("4. Bartender");
+        System.out.println("5. Waiter");
+        int role = Utilities.getInput(1,5);
+
         switch(role){
             case 1:
                 employeeDB.add(new Manager(name, dob, newEmployeeGender));
