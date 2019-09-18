@@ -1,5 +1,6 @@
 package model;
 
+import UI.Utilities;
 import model.employees.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,21 +25,11 @@ public class EmployeeManagement {
         System.out.println("Enter DOB (yyyy-mm-dd)");
         String dob = sc.nextLine();
 
-        int gender;
-        while (true) {
-            System.out.println("Enter employee gender");
-            System.out.println("1. Female");
-            System.out.println("2. Male");
-            System.out.println("3. Other");
-            try {
-                gender = Integer.parseInt(sc.nextLine());
-                if (gender >= 1 && gender <= 3) {
-                    break;
-                } else {
-                    System.out.println("Enter a number from 1 to 3 only!");
-                }
-            } catch (NumberFormatException ignored) {}
-        }
+        System.out.println("Enter employee gender");
+        System.out.println("1. Female");
+        System.out.println("2. Male");
+        System.out.println("3. Other");
+        int gender = Utilities.getInput(1,3);
 
         GenderType newEmployeeGender = null;
         switch(gender) {
