@@ -47,23 +47,14 @@ public class EmployeeManagement {
                 break;
         }
 
-        int role;
-        while (true){
-            System.out.println("Enter employee role");
-            System.out.println("1. Manager");
-            System.out.println("2. HR");
-            System.out.println("3. Chef");
-            System.out.println("4. Bartender");
-            System.out.println("5. Waiter");
-            try {
-                 role = Integer.parseInt(sc.nextLine());
-                if (role >= 1 && role <= 5) {
-                    break;
-                } else {
-                    System.out.println("Enter a number from 1 to 5 only!");
-                }
-            } catch (NumberFormatException ignored) { }
-        }
+        System.out.println("Enter employee role");
+        System.out.println("1. Manager");
+        System.out.println("2. HR");
+        System.out.println("3. Chef");
+        System.out.println("4. Bartender");
+        System.out.println("5. Waiter");
+        int role = Utilities.getInput(1,5);
+
         switch(role){
             case 1:
                 employeeDB.add(new Manager(name, dob, newEmployeeGender));
