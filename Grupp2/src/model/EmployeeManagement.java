@@ -1,9 +1,18 @@
 package model;
 
-import model.employees.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.sun.webkit.Utilities;
+
+import model.employees.Bartender;
+import model.employees.Chef;
+import model.employees.Employee;
+import model.employees.GenderType;
+import model.employees.HR;
+import model.employees.Manager;
+import model.employees.Waiter;
+import model.exception.EmployeeNotFoundException;
 
 public class EmployeeManagement {
 
@@ -123,13 +132,48 @@ public class EmployeeManagement {
     public static void updateNameByID() {
         System.out.println("What is the ID of the employee?");
         int id = Integer.parseInt(sc.nextLine());
-
+        
+        try {
+			Employee foundEmployee = getEmployeeByID(id);
+			System.out.println("Enter new name: ");
+			String name = sc.nextLine();
+			foundEmployee.setName(name);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
+        
     }
 
     public static void updateDobByID() {
+    	System.out.println("What is the ID of the employee?");
+    	int id = Integer.parseInt(sc.nextLine());
+    	
+        try {
+			Employee foundEmployee = getEmployeeByID(id);
+			System.out.println("Enter new Date of birth: (yyyy-mm-dd): ");
+			String dob = sc.nextLine();
+			foundEmployee.setDob(dob);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
+        
     }
 
     public static void updateSalaryByID() {
+    	System.out.println("What is the ID of the employee?");
+    	int id = Integer.parseInt(sc.nextLine());
+    	
+        try {
+			Employee foundEmployee = getEmployeeByID(id);
+			System.out.println("Enter new salary: ");
+			double salary = Double.parseDouble(sc.nextLine());
+			foundEmployee.setSalary(salary);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
+        
+        
+        
     }
 
     public static void searchByName() {
@@ -138,6 +182,12 @@ public class EmployeeManagement {
     public static void searchByID() {
         System.out.println("What is the ID of the employee?");
         int id = Integer.parseInt(sc.nextLine());
+        
+        try {
+			Employee foundEmployee = getEmployeeByID(id);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
     }
 
     public static void searchByRole() {
@@ -180,4 +230,14 @@ public class EmployeeManagement {
 //        }
 //        System.out.println("Oldest employee: " + db[oldest]);
 //    }
+    
+    
+    private static Employee getEmployeeByID(int id) throws EmployeeNotFoundException {
+    	
+    	for(Employee emp: employeeDB) {
+    		if(emp.getID() == id)
+    			return emp;
+    	}
+    	throw new EmployeeNotFoundException();
+    }
 }
