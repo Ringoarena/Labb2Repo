@@ -1,10 +1,7 @@
 package ui;
 
-import java.util.Scanner;
-
 public class StatisticsMenu {
     private static boolean previous;
-    private static Scanner sc = new Scanner(System.in);
 
     public static void runSubMenu() {
         previous = false;
@@ -32,21 +29,6 @@ public class StatisticsMenu {
         System.out.println("6. Percentage men per role");
         System.out.println("0. Return to previous menu");
     }
-
-//    private static int getInput() {
-//        int nDecision = 3;
-//        int decision = -1;
-//        while (!(0 <= decision && decision <= nDecision)) {
-//            System.out.print("Enter decision: ");
-//            try {
-//                decision = Integer.parseInt(sc.nextLine());
-//            } catch (NumberFormatException ignored) {}
-//            if (!(0 <= decision && decision <= nDecision)) {
-//                System.out.println("Illegal input, numbers from 0 to " + nDecision + " only!");
-//            }
-//        }
-//        return decision;
-//    }
 
     private static void performAction(int decision) {
         switch (decision) {

@@ -2,11 +2,8 @@ package ui;
 
 import model.EmployeeManagement;
 
-import java.util.Scanner;
-
 public class ManagementMenu {
     private static boolean previous;
-    private static Scanner sc = new Scanner(System.in);
 
     public static void runSubMenu() {
         previous = false;
@@ -37,21 +34,6 @@ public class ManagementMenu {
         System.out.println("9. Display all employees");
         System.out.println("0. Return to previous menu");
     }
-
-//    private static int getInput() {
-//        int nDecision = 9;
-//        int decision = -1;
-//        while (!(0 <= decision && decision <= nDecision)) {
-//            System.out.print("Enter decision: ");
-//            try {
-//                decision = Integer.parseInt(sc.nextLine());
-//            } catch (NumberFormatException ignored) {}
-//            if (!(0 <= decision && decision <= nDecision)) {
-//                System.out.println("Illegal input, numbers from 0 to " + nDecision + " only!");
-//            }
-//        }
-//        return decision;
-//    }
 
     private static void performAction(int decision) {
         switch (decision) {
