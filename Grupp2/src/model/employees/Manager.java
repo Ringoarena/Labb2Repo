@@ -7,7 +7,8 @@ public class Manager extends Employee {
         super(name, dob, gender);
         setSalary(18000);
     }
-
+    
+    private int test;
     @Override
     public double bonus() {
     	double bonus = 2500;
