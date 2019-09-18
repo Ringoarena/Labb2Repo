@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 public class StatisticsMenu {
     private static boolean previous;

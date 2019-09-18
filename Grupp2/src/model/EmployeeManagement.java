@@ -1,23 +1,26 @@
 package model;
 
-import UI.Utilities;
-import model.employees.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import model.*;
+import model.employees.*;
+import model.exception.EmployeeNotFoundException;
+import ui.Utilities;
 
 public class EmployeeManagement {
 
     private static ArrayList<Employee> employeeDB = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
-    public static void loadDB() {
+    public static void loadDB(){
         employeeDB.add(new Waiter("Rikard", "1990-09-25", GenderType.MALE));
         employeeDB.add(new Waiter("Johannes", "1930-09-25", GenderType.MALE));
         employeeDB.add(new Waiter("Mattias", "1200-09-25", GenderType.MALE));
     }
 
     public static void addEmployee(){
-        //test
+
         System.out.println("Enter employee name");
         String name = sc.nextLine();
 
@@ -104,13 +107,48 @@ public class EmployeeManagement {
     public static void updateNameByID() {
         System.out.println("What is the ID of the employee?");
         int id = Integer.parseInt(sc.nextLine());
-
+        
+        try {
+			Employee foundEmployee = getEmployeeByID(id);
+			System.out.println("Enter new name: ");
+			String name = sc.nextLine();
+			foundEmployee.setName(name);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
+        
     }
 
     public static void updateDobByID() {
+    	System.out.println("What is the ID of the employee?");
+    	int id = Integer.parseInt(sc.nextLine());
+    	
+        try {
+			Employee foundEmployee = getEmployeeByID(id);
+			System.out.println("Enter new Date of birth: (yyyy-mm-dd): ");
+			String dob = sc.nextLine();
+			foundEmployee.setDob(dob);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
+        
     }
 
     public static void updateSalaryByID() {
+    	System.out.println("What is the ID of the employee?");
+    	int id = Integer.parseInt(sc.nextLine());
+    	
+        try {
+			Employee foundEmployee = getEmployeeByID(id);
+			System.out.println("Enter new salary: ");
+			double salary = Double.parseDouble(sc.nextLine());
+			foundEmployee.setSalary(salary);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
+        
+        
+        
     }
 
     public static void searchByName() {
@@ -133,6 +171,12 @@ public class EmployeeManagement {
     public static void searchByID() {
         System.out.println("What is the ID of the employee?");
         int id = Integer.parseInt(sc.nextLine());
+        
+        try {
+			Employee foundEmployee = getEmployeeByID(id);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
     }
 
     public static void searchByRole() {
@@ -175,4 +219,14 @@ public class EmployeeManagement {
 //        }
 //        System.out.println("Oldest employee: " + db[oldest]);
 //    }
+    
+    
+    private static Employee getEmployeeByID(int id) throws EmployeeNotFoundException {
+    	
+    	for(Employee emp: employeeDB) {
+    		if(emp.getID() == id)
+    			return emp;
+    	}
+    	throw new EmployeeNotFoundException();
+    }
 }
