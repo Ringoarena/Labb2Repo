@@ -13,7 +13,14 @@ public class HR extends Employee {
 
     @Override
     public double bonus() {
-        return 0;
+        if(noOfPeopleRecruited>10) {
+        	System.out.println("Congratulations on fixing the new recuits!");
+        	return 2000;
+        }
+        else {
+        	System.out.println("You have to work hard nextYear");
+        	return 0;
+        }
     }
 
     @Override
@@ -21,8 +28,10 @@ public class HR extends Employee {
         return super.toString() + " TIP placeholder";
     }
     
-    public void interview() {
-    	Random rnd = new Random();
+
+	@Override
+	public void performDuties() {
+	  	Random rnd = new Random();
     	Boolean succesfulInterview = rnd.nextBoolean();
     	if(succesfulInterview) {
     		System.out.println("The interview was succesful and the candidate is going to be hired");
@@ -31,6 +40,5 @@ public class HR extends Employee {
     	else
     		System.out.println("The interviewee made an unfortunate impression and we're going to move on to newer candidates.");
     	
-    	
-    }
+	}
 }

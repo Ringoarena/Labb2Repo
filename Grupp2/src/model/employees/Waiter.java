@@ -14,10 +14,10 @@ public class Waiter extends Employee {
 	@Override
 	public double bonus() {
 		if (0.1 > tip / getSalary()) {
-			System.out.println("Du har fått in 10% av din lön i dricks och förtjänar en bonus!");
+			System.out.println("You have earned at least 10% of your salary in tip, you deserve a bonus!");
 			return 1000;
 		} else {
-			System.out.println("Du förtjänar tyvärr inte bonus detta år pga av din låga drickskvot!");
+			System.out.println("You do not deserve a bonus this year, better luck next time!");
 			return 0;
 		}
 	}
@@ -25,7 +25,7 @@ public class Waiter extends Employee {
 
 	private void tipGenerator() {
 		Random rnd = new Random(System.currentTimeMillis());
-		this.tip = rnd.nextInt(11) + 10;
+		this.tip += rnd.nextInt(11) + 10;
 	}
 
 	@Override
