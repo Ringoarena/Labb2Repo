@@ -114,7 +114,20 @@ public class EmployeeManagement {
     }
 
     public static void searchByName() {
-        //TODO
+        System.out.println("What is the name of the employee?");
+        String inputName = sc.nextLine();
+        boolean foundName = false;
+        
+        for (Employee employee : employeeDB) {
+            if(inputName.equals(employee.getName())){
+                System.out.println(employee.toString());
+                foundName = true;
+            }
+        }
+        
+        if(!foundName){
+            System.out.println("There are no employees with that name.");
+        }
     }
 
     public static void searchByID() {
