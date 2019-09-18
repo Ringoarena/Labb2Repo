@@ -1,7 +1,6 @@
 package model;
 
 import model.employees.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,14 +9,14 @@ public class EmployeeManagement {
     private static ArrayList<Employee> employeeDB = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
-    public static void loadDB(){
+    public static void loadDB() {
         employeeDB.add(new Waiter("Rikard", "1990-09-25", GenderType.MALE));
         employeeDB.add(new Waiter("Johannes", "1930-09-25", GenderType.MALE));
         employeeDB.add(new Waiter("Mattias", "1200-09-25", GenderType.MALE));
     }
 
     public static void addEmployee(){
-
+        //test
         System.out.println("Enter employee name");
         String name = sc.nextLine();
 
