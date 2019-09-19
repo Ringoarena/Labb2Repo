@@ -26,7 +26,7 @@ public class Bartender extends Employee {
 
 	@Override
 	public void performDuties() {
-		System.out.println("Here you go! Enyor your drink!");
+		System.out.println("Here you go! Enjoy your drink!");
 		cocktailServed++;
 	}
 }

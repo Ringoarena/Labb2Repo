@@ -23,13 +23,10 @@ public class Manager extends Employee {
     public String toString(){
         return super.toString() + ", People fired: " + noOfPeopleFired;
     }
-
-    private void fire() {
-    	System.out.println("YOU'RE FIRED GET OUT OF HERE!");
-    	noOfPeopleFired++;
-    }
+    
 	@Override
 	public void performDuties() {
-		fire();
+		System.out.println("YOU'RE FIRED GET OUT OF HERE!");
+    	noOfPeopleFired++;
 	}
 }
