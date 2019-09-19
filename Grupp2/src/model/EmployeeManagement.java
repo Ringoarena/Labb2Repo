@@ -15,8 +15,9 @@ public class EmployeeManagement {
 
     public static void loadDB(){
         employeeDB.add(new Waiter("Rikard", "1990-09-25", GenderType.MALE));
-        employeeDB.add(new Waiter("Johannes", "1930-09-25", GenderType.MALE));
-        employeeDB.add(new Waiter("Mattias", "1200-09-25", GenderType.MALE));
+        employeeDB.add(new Chef("Johannes", "1930-09-25", GenderType.MALE));
+        employeeDB.add(new Bartender("Mattias", "1200-09-25", GenderType.MALE));
+        performDuties();
     }
 
     public static void addEmployee(){
@@ -172,14 +173,22 @@ public class EmployeeManagement {
         System.out.println("What is the ID of the employee?");
         int id = Integer.parseInt(sc.nextLine());
         
+        // Anropar korrekt toString enligt polymorfism
         try {
 			Employee foundEmployee = getEmployeeByID(id);
+			System.out.println(foundEmployee.toString());
 		} catch (EmployeeNotFoundException e) {
 			System.out.println("Couldn't find the employee with ID: " + id);
 		}
     }
-
+    
+    private static void performDuties() {
+    	for(Employee emp: employeeDB)
+    		emp.performDuties();
+    }
+    
     public static void searchByRole() {
+    	
     }
 
 //    public static void removeEmployeeByID() {

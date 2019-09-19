@@ -39,6 +39,5 @@ public class HR extends Employee {
     	}
     	else
     		System.out.println("The interviewee made an unfortunate impression and we're going to move on to newer candidates.");
-    	
 	}
 }
