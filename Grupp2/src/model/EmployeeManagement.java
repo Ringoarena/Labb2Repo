@@ -117,7 +117,6 @@ public class EmployeeManagement {
 		} catch (EmployeeNotFoundException e) {
 			System.out.println("Couldn't find the employee with ID: " + id);
 		}
-        
     }
 
     public static void updateDobByID() {
@@ -132,7 +131,6 @@ public class EmployeeManagement {
 		} catch (EmployeeNotFoundException e) {
 			System.out.println("Couldn't find the employee with ID: " + id);
 		}
-        
     }
 
     public static void updateSalaryByID() {
@@ -147,9 +145,6 @@ public class EmployeeManagement {
 		} catch (EmployeeNotFoundException e) {
 			System.out.println("Couldn't find the employee with ID: " + id);
 		}
-        
-        
-        
     }
 
     public static void searchByName() {
@@ -163,7 +158,6 @@ public class EmployeeManagement {
                 foundName = true;
             }
         }
-        
         if(!foundName){
             System.out.println("There are no employees with that name.");
         }
@@ -193,56 +187,16 @@ public class EmployeeManagement {
             }
         }
     }
-    
-    public static void searchByRole() {
-    	
+
+    private static Employee getEmployeeByID(int id) throws EmployeeNotFoundException {
+        for(Employee emp: employeeDB) {
+            if(emp.getID() == id)
+                return emp;
+        }
+        throw new EmployeeNotFoundException();
     }
 
-//    public static void removeEmployeeByID() {
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("\nWhat is the ID of the employee?");
-//        int id = Integer.parseInt(sc.nextLine());
-//
-//        for (int i = 0; i < counter; i++) {
-//            if ((employeeDB[i]).getID() == id) {
-//                if (i == (counter - 1)) {
-//                    employeeDB[counter - 1] = null;
-//                } else {
-//                    employeeDB[i] = employeeDB[counter - 1];
-//                }
-//                employeeDB[counter - 1] = null;
-//                counter--;
-//            }
-//        }
-//    }
-//
-//    public static void findHighestSalary(){
-//        int highest = 0;
-//        for (int i = 1; i < db.length; i++) {
-//            if (db[i].getSalary() > db[highest].getSalary()) {
-//                highest = i;
-//            }
-//        }
-//        System.out.println("Highest salary: " + db[highest]);
-//    }
-//
-//    public static void findOldestPerson(){
-//        int oldest = 0;
-//        for (int i = 1; i < db.length; i++) {
-//            if (db[i].calculateAge() > db[oldest].calculateAge()) {
-//                oldest = i;
-//            }
-//        }
-//        System.out.println("Oldest employee: " + db[oldest]);
-//    }
-    
-    
-    private static Employee getEmployeeByID(int id) throws EmployeeNotFoundException {
-    	
-    	for(Employee emp: employeeDB) {
-    		if(emp.getID() == id)
-    			return emp;
-    	}
-    	throw new EmployeeNotFoundException();
+    public static void searchByRole() {
+
     }
 }
