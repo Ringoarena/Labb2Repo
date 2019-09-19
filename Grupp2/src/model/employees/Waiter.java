@@ -30,7 +30,7 @@ public class Waiter extends Employee {
 
 	@Override
 	public String toString() {
-		return super.toString() + " TIP placeholder";
+		return super.toString() + ", Tip: " + tip;
 	}
 
 	@Override
