@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-
 import model.employees.*;
 import model.exception.EmployeeNotFoundException;
 import ui.Utilities;
