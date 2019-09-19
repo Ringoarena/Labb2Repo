@@ -1,9 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
-import model.*;
 import model.employees.*;
 import model.exception.EmployeeNotFoundException;
 import ui.Utilities;
@@ -17,7 +17,7 @@ public class EmployeeManagement {
         employeeDB.add(new Waiter("Rikard", "1990-09-25", GenderType.MALE));
         employeeDB.add(new Chef("Johannes", "1930-09-25", GenderType.MALE));
         employeeDB.add(new Bartender("Mattias", "1200-09-25", GenderType.MALE));
-        performDuties();
+        putToWork();
     }
 
     public static void addEmployee(){
@@ -182,9 +182,16 @@ public class EmployeeManagement {
 		}
     }
     
-    private static void performDuties() {
-    	for(Employee emp: employeeDB)
-    		emp.performDuties();
+    private static void putToWork() {
+        Random rnd = new Random(System.currentTimeMillis());
+        int nTimes;
+
+    	for(Employee employee: employeeDB) {
+            nTimes = rnd.nextInt(10) + 1;
+            for (int i = 0; i < nTimes; i++) {
+                employee.performDuties();
+            }
+        }
     }
     
     public static void searchByRole() {
