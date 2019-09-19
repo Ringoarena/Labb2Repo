@@ -21,7 +21,7 @@ public class Manager extends Employee {
 
     @Override
     public String toString(){
-        return super.toString() + " TIP placeholder";
+        return super.toString() + ", People fired: " + noOfPeopleFired;
     }
 
     private void fire() {

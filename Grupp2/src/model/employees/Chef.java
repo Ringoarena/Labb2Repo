@@ -20,7 +20,7 @@ public class Chef extends Employee{
 
     @Override
     public String toString(){
-        return super.toString() + " TIP placeholder";
+        return super.toString() + ", Drinks during work: " + noOfDrinksDuringWork;
     }
 
 	@Override
