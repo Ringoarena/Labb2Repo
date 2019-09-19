@@ -24,7 +24,7 @@ public class Waiter extends Employee {
 
 
 	private void tipGenerator() {
-		Random rnd = new Random(System.currentTimeMillis());
+		Random rnd = new Random();
 		int tip = rnd.nextInt(11) + 10;
 		System.out.println("You got " + tip + "$ in tip");
 		this.tip += tip;
