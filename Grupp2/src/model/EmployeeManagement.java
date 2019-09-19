@@ -276,7 +276,7 @@ public class EmployeeManagement {
             }
         }
 
-        System.out.println("The percentage of female employees is: " + (int) ((nrOfWomen / employeeDB.size()) * 100) + "%.");
+        System.out.println("The percentage of female employees is: " + (int) (nrOfWomen / employeeDB.size() * 100) + "%.");
     }
 
     public static void displayPercentageMenPerRole() {
@@ -285,71 +285,63 @@ public class EmployeeManagement {
         ArrayList<HR> hrList = new ArrayList<>();
         ArrayList<Manager> managerList = new ArrayList<>();
         ArrayList<Waiter> waiterList = new ArrayList<>();
-        double nrOfMen;
+        double nrOfBartenderMen = 0;
+        double nrOfChefMen = 0;
+        double nrOfHRMen = 0;
+        double nrOfManagerMen = 0;
+        double nrOfWaiterMen = 0;
 
-        for (int i = 1; i <= 5; i++) {
-            nrOfMen = 0;
-            for (Employee employee : employeeDB) {
+        for (Employee employee : employeeDB) {
+
+            if (employee instanceof Bartender) {
+                bartenderList.add((Bartender) employee);
                 if (employee.getGender() == GenderType.MALE) {
-                    nrOfMen++;
+                    nrOfBartenderMen++;
                 }
-                switch (i) {
-                    case 1:
-                        if (employee instanceof Bartender) {
-                            bartenderList.add((Bartender) employee);
-                        }
-                        break;
-                    case 2:
-                        if (employee instanceof Chef) {
-                            chefList.add((Chef) employee);
-                        }
-                        break;
-                    case 3:
-                        if (employee instanceof HR) {
-                            hrList.add((HR) employee);
-                        }
-                        break;
-                    case 4:
-                        if (employee instanceof Manager) {
-                            managerList.add((Manager) employee);
-                        }
-                        break;
-                    case 5:
-                        if (employee instanceof Waiter) {
-                            waiterList.add((Waiter) employee);
-                        }
+            }
+            if (employee instanceof Chef) {
+                chefList.add((Chef) employee);
+                if (employee.getGender() == GenderType.MALE) {
+                    nrOfChefMen++;
                 }
-
             }
-            System.out.println(nrOfMen);
-            switch (i) {
-                case 1:
-                    if (!bartenderList.isEmpty()) {
-                        System.out.println("Percentage of male bartenders: " + (int) (nrOfMen / bartenderList.size() * 100) + "%.");
-                    }
-                    break;
-                case 2:
-                    if (!chefList.isEmpty()) {
-                        System.out.println("Percentage of male chefs: " + (int) (nrOfMen / chefList.size() * 100) + "%.");
-                    }
-                    break;
-                case 3:
-                    if (!hrList.isEmpty()) {
-                        System.out.println("Percentage of men in HR: " + (int) (nrOfMen / hrList.size() * 100) + "%.");
-                    }
-                    break;
-                case 4:
-                    if (!managerList.isEmpty()) {
-                        System.out.println("Percentage of male managers: " + (int) ((nrOfMen / managerList.size()) * 100) + "%.");
-                    }
-                    break;
-                case 5:
-                    if (!(waiterList.isEmpty())) {
-                        System.out.println("Percentage of male waiters: " + (int) ((nrOfMen / waiterList.size()) * 100) + "%.");
-                    }
-
+            if (employee instanceof HR) {
+                hrList.add((HR) employee);
+                if (employee.getGender() == GenderType.MALE) {
+                    nrOfHRMen++;
+                }
             }
+            if (employee instanceof Manager) {
+                managerList.add((Manager) employee);
+                if (employee.getGender() == GenderType.MALE) {
+                    nrOfManagerMen++;
+                }
+            }
+            if (employee instanceof Waiter) {
+                waiterList.add((Waiter) employee);
+                if (employee.getGender() == GenderType.MALE) {
+                    nrOfWaiterMen++;
+                }
+            }
+
+        }
+
+        if (!bartenderList.isEmpty()) {
+            System.out.println("Percentage of male bartenders: " + (int) (nrOfBartenderMen / bartenderList.size() * 100) + "%.");
+        }
+        if (!chefList.isEmpty()) {
+            System.out.println("Percentage of male chefs: " + (int) (nrOfChefMen / chefList.size() * 100) + "%.");
+        }
+        if (!hrList.isEmpty()) {
+            System.out.println("Percentage of men in HR: " + (int) (nrOfHRMen / hrList.size() * 100) + "%.");
+        }
+        if (!managerList.isEmpty()) {
+            System.out.println("Percentage of male managers: " + (int) (nrOfManagerMen / managerList.size() * 100) + "%.");
+        }
+        if (!waiterList.isEmpty()) {
+            System.out.println("Percentage of male waiters: " + (int) (nrOfWaiterMen / waiterList.size() * 100) + "%.");
         }
 
     }
+
 }
