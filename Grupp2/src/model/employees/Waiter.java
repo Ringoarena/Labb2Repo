@@ -13,7 +13,7 @@ public class Waiter extends Employee {
 
 	@Override
 	public double bonus() {
-		if (0.1 > tip / getSalary()) {
+		if (0.1 <= tip / getSalary()) {
 			System.out.println("You have earned at least 10% of your salary in tip, you deserve a bonus!");
 			return 1000;
 		} else {
