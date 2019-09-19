@@ -1,5 +1,7 @@
 package ui;
 
+import model.EmployeeManagement;
+
 public class StatisticsMenu {
     private static boolean previous;
 
@@ -37,13 +39,22 @@ public class StatisticsMenu {
                 previous = true;
                 break;
             case 1:
-                System.out.println("\nCalling sub-option 1...");
+                EmployeeManagement.displayAverageWage();
                 break;
             case 2:
-                System.out.println("\nCalling sub-option 2...");
+                EmployeeManagement.displayMaximumWage();
                 break;
             case 3:
-                System.out.println("\nCalling sub-option 3...");
+                EmployeeManagement.displayMinimumWage();
+                break;
+            case 4:
+                EmployeeManagement.displayTotalBonus();
+                break;
+            case 5:
+                EmployeeManagement.displayPercentageWomen();
+                break;
+            case 6:
+                EmployeeManagement.displayPercentageMenPerRole();
                 break;
             default:
                 System.out.println("\nUnknown error...");

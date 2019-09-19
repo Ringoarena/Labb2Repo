@@ -52,6 +52,10 @@ public abstract class Employee {
     public void setSalary(double salary) {
         this.salary = salary;
     }
+    
+    public GenderType getGender(){
+        return this.gender;
+    }
 
     @Override
     public String toString() {
