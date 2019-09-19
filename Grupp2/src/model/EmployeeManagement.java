@@ -13,13 +13,13 @@ public class EmployeeManagement {
     private static ArrayList<Employee> employeeDB = new ArrayList<>();
     private static Scanner sc = new Scanner(System.in);
 
-    public static void loadDB() {
+    public static void loadDB(){
         employeeDB.add(new Waiter("Rikard", "1990-09-25", GenderType.MALE));
         employeeDB.add(new Waiter("Johannes", "1930-09-25", GenderType.MALE));
         employeeDB.add(new Waiter("Mattias", "1200-09-25", GenderType.MALE));
     }
 
-    public static void addEmployee() {
+    public static void addEmployee(){
 
         System.out.println("Enter employee name");
         String name = sc.nextLine();
@@ -32,10 +32,10 @@ public class EmployeeManagement {
         System.out.println("1. Female");
         System.out.println("2. Male");
         System.out.println("3. Other");
-        int gender = Utilities.getInput(1, 3);
+        int gender = Utilities.getInput(1,3);
 
         GenderType newEmployeeGender = null;
-        switch (gender) {
+        switch(gender) {
             case 1:
                 newEmployeeGender = GenderType.FEMALE;
                 break;
@@ -56,9 +56,9 @@ public class EmployeeManagement {
         System.out.println("3. Chef");
         System.out.println("4. Bartender");
         System.out.println("5. Waiter");
-        int role = Utilities.getInput(1, 5);
+        int role = Utilities.getInput(1,5);
 
-        switch (role) {
+        switch(role){
             case 1:
                 employeeDB.add(new Manager(name, dob, newEmployeeGender));
                 break;
@@ -83,10 +83,9 @@ public class EmployeeManagement {
         return employeeDB.size();
     }
 
-    public static void displayAllEmployees() {
-        for (Employee emp : employeeDB) {
+    public static void displayAllEmployees(){
+        for (Employee emp: employeeDB)
             System.out.println(emp.toString());
-        }
     }
 
     public static void deleteEmployeeByID() {
@@ -94,7 +93,7 @@ public class EmployeeManagement {
         int id = Integer.parseInt(sc.nextLine());
         Employee tmp = null;
         // trådsäker metod
-        for (Employee emp : employeeDB) {
+        for (Employee emp: employeeDB) {
             if (emp.getID() == id) {
                 tmp = emp;
                 break;
@@ -108,61 +107,63 @@ public class EmployeeManagement {
     public static void updateNameByID() {
         System.out.println("What is the ID of the employee?");
         int id = Integer.parseInt(sc.nextLine());
-
+        
         try {
-            Employee foundEmployee = getEmployeeByID(id);
-            System.out.println("Enter new name: ");
-            String name = sc.nextLine();
-            foundEmployee.setName(name);
-        } catch (EmployeeNotFoundException e) {
-            System.out.println("Couldn't find the employee with ID: " + id);
-        }
-
+			Employee foundEmployee = getEmployeeByID(id);
+			System.out.println("Enter new name: ");
+			String name = sc.nextLine();
+			foundEmployee.setName(name);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
+        
     }
 
     public static void updateDobByID() {
-        System.out.println("What is the ID of the employee?");
-        int id = Integer.parseInt(sc.nextLine());
-
+    	System.out.println("What is the ID of the employee?");
+    	int id = Integer.parseInt(sc.nextLine());
+    	
         try {
-            Employee foundEmployee = getEmployeeByID(id);
-            System.out.println("Enter new Date of birth: (yyyy-mm-dd): ");
-            String dob = sc.nextLine();
-            foundEmployee.setDob(dob);
-        } catch (EmployeeNotFoundException e) {
-            System.out.println("Couldn't find the employee with ID: " + id);
-        }
-
+			Employee foundEmployee = getEmployeeByID(id);
+			System.out.println("Enter new Date of birth: (yyyy-mm-dd): ");
+			String dob = sc.nextLine();
+			foundEmployee.setDob(dob);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
+        
     }
 
     public static void updateSalaryByID() {
-        System.out.println("What is the ID of the employee?");
-        int id = Integer.parseInt(sc.nextLine());
-
+    	System.out.println("What is the ID of the employee?");
+    	int id = Integer.parseInt(sc.nextLine());
+    	
         try {
-            Employee foundEmployee = getEmployeeByID(id);
-            System.out.println("Enter new salary: ");
-            double salary = Double.parseDouble(sc.nextLine());
-            foundEmployee.setSalary(salary);
-        } catch (EmployeeNotFoundException e) {
-            System.out.println("Couldn't find the employee with ID: " + id);
-        }
-
+			Employee foundEmployee = getEmployeeByID(id);
+			System.out.println("Enter new salary: ");
+			double salary = Double.parseDouble(sc.nextLine());
+			foundEmployee.setSalary(salary);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
+        
+        
+        
     }
 
     public static void searchByName() {
         System.out.println("What is the name of the employee?");
         String inputName = sc.nextLine();
         boolean foundName = false;
-
+        
         for (Employee employee : employeeDB) {
-            if (inputName.equals(employee.getName())) {
+            if(inputName.equals(employee.getName())){
                 System.out.println(employee.toString());
                 foundName = true;
             }
         }
-
-        if (!foundName) {
+        
+        if(!foundName){
             System.out.println("There are no employees with that name.");
         }
     }
@@ -170,12 +171,12 @@ public class EmployeeManagement {
     public static void searchByID() {
         System.out.println("What is the ID of the employee?");
         int id = Integer.parseInt(sc.nextLine());
-
+        
         try {
-            Employee foundEmployee = getEmployeeByID(id);
-        } catch (EmployeeNotFoundException e) {
-            System.out.println("Couldn't find the employee with ID: " + id);
-        }
+			Employee foundEmployee = getEmployeeByID(id);
+		} catch (EmployeeNotFoundException e) {
+			System.out.println("Couldn't find the employee with ID: " + id);
+		}
     }
 
     public static void searchByRole() {
@@ -218,14 +219,15 @@ public class EmployeeManagement {
 //        }
 //        System.out.println("Oldest employee: " + db[oldest]);
 //    }
+    
+    
     private static Employee getEmployeeByID(int id) throws EmployeeNotFoundException {
-
-        for (Employee emp : employeeDB) {
-            if (emp.getID() == id) {
-                return emp;
-            }
-        }
-        throw new EmployeeNotFoundException();
+    	
+    	for(Employee emp: employeeDB) {
+    		if(emp.getID() == id)
+    			return emp;
+    	}
+    	throw new EmployeeNotFoundException();
     }
 
     public static void displayAverageWage() {
