@@ -180,7 +180,57 @@ public class EmployeeManagement {
     }
 
     public static void searchByRole() {
+    	System.out.println("Which role do you want to find?");
+        System.out.println("1. Bartender");
+        System.out.println("2. Chef");
+        System.out.println("3. HR rep");
+        System.out.println("4. Manager");
+        System.out.println("5. Waiter");
+
+        int choice = Integer.parseInt(sc.nextLine());
+        switch (choice) {
+            case 1:
+                for (Employee employee : employeeDB) {
+                    if (employee instanceof Bartender) {
+                        System.out.println(employee);
+                    }
+                }
+                break;
+            case 2:
+                for (Employee employee : employeeDB) {
+                    if (employee instanceof Chef) {
+                        System.out.println(employee);
+                    }
+                }
+                break;
+            case 3:
+                for (Employee employee : employeeDB) {
+                    if (employee instanceof HR) {
+                        System.out.println(employee);
+                    }
+                }
+                break;
+            case 4:
+                for (Employee employee : employeeDB) {
+                    if (employee instanceof Manager) {
+                        System.out.println(employee);
+                    }
+                }
+                break;
+            case 5:
+                for (Employee employee : employeeDB) {
+                    if (employee instanceof Waiter) {
+                        System.out.println(employee);
+                    }
+                }
+                break;
+            default:
+                System.out.println("Unkown error");
+
+        }
+
     }
+    
 
 //    public static void removeEmployeeByID() {
 //        Scanner sc = new Scanner(System.in);
