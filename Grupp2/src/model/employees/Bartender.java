@@ -21,7 +21,7 @@ public class Bartender extends Employee {
 
     @Override
     public String toString(){
-        return super.toString() + " TIP placeholder";
+        return super.toString() + ", Cocktails served: " + cocktailServed;
     }
 
 	@Override

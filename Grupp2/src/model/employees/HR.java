@@ -25,7 +25,7 @@ public class HR extends Employee {
 
     @Override
     public String toString(){
-        return super.toString() + " TIP placeholder";
+        return super.toString() + ", People recruited: " + noOfPeopleRecruited;
     }
     
 
