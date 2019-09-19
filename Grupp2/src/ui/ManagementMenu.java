@@ -2,16 +2,16 @@ package ui;
 
 import model.EmployeeManagement;
 
-public class ManagementMenu {
+class ManagementMenu {
     private static boolean previous;
 
-    public static void runSubMenu() {
+    static void runSubMenu() {
         previous = false;
         printHeader();
 
         while (!previous) {
             printMenu();
-            performAction(Utilities.getInput(0, 9));
+            performAction(Utilities.getInput(0, 10));
         }
     }
 
@@ -32,6 +32,7 @@ public class ManagementMenu {
         System.out.println("7. Search employee by ID");
         System.out.println("8. Search employee by role");
         System.out.println("9. Display all employees");
+        System.out.println("10. Put employees to work");
         System.out.println("0. Return to previous menu");
     }
 
@@ -67,6 +68,9 @@ public class ManagementMenu {
                 break;
             case 9:
                 EmployeeManagement.displayAllEmployees();
+                break;
+            case 10:
+                EmployeeManagement.putToWork();
                 break;
             default:
                 System.out.println("\nUnknown error...");

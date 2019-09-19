@@ -2,10 +2,10 @@ package ui;
 
 import model.EmployeeManagement;
 
-public class StatisticsMenu {
+class StatisticsMenu {
     private static boolean previous;
 
-    public static void runSubMenu() {
+    static void runSubMenu() {
         previous = false;
         printHeader();
 

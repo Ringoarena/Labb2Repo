@@ -176,7 +176,7 @@ public class EmployeeManagement {
 		}
 	}
 
-	private static void putToWork() {
+	public static void putToWork() {
 		Random rnd = new Random(System.currentTimeMillis());
 		int nTimes;
 
