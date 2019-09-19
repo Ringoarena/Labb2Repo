@@ -2,7 +2,7 @@ package model.employees;
 
 public class Bartender extends Employee {
 
-	
+	private int test;
 	private int cocktailServed;
     public Bartender(String name, String dob, GenderType gender) {
         super(name, dob, gender);
