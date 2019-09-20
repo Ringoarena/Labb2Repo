@@ -16,7 +16,8 @@ public class EmployeeManagement {
 	public static void loadDB() {
 		employeeDB.add(new Waiter("Rikard", LocalDate.parse("1990-09-25"), GenderType.MALE));
 		employeeDB.add(new Chef("Johannes", LocalDate.parse("1991-09-25"), GenderType.MALE));
-		employeeDB.add(new Bartender("Mattias", LocalDate.parse("1985-09-25"), GenderType.MALE));
+		// employeeDB.add(new Bartender("Mattias", LocalDate.parse("1985-09-25"),
+		// GenderType.MALE));
 		putToWork();
 	}
 
@@ -28,7 +29,7 @@ public class EmployeeManagement {
 		// TODO
 		System.out.println("Enter DOB (yyyy-mm-dd)");
 		String s = sc.nextLine();
-                LocalDate dob = LocalDate.parse(s);
+		LocalDate dob = LocalDate.parse(s);
 
 		System.out.println("Enter employee gender");
 		System.out.println("1. Female");
@@ -199,6 +200,7 @@ public class EmployeeManagement {
 
 	public static void searchByRole() {
 
+		ArrayList<Employee> localDB = new ArrayList<>();
 		System.out.println("Which role do you want to find?");
 		System.out.println("1. Bartender");
 		System.out.println("2. Chef");
@@ -212,41 +214,53 @@ public class EmployeeManagement {
 		case 1:
 			for (Employee employee : employeeDB) {
 				if (employee instanceof Bartender) {
-					System.out.println(employee);
+					localDB.add(employee);
 				}
 			}
 			break;
 		case 2:
 			for (Employee employee : employeeDB) {
 				if (employee instanceof Chef) {
-					System.out.println(employee);
+					localDB.add(employee);
 				}
+
 			}
 			break;
 		case 3:
 			for (Employee employee : employeeDB) {
 				if (employee instanceof HR) {
-					System.out.println(employee);
+					localDB.add(employee);
 				}
+
 			}
 			break;
 		case 4:
 			for (Employee employee : employeeDB) {
 				if (employee instanceof Manager) {
-					System.out.println(employee);
+					localDB.add(employee);
 				}
+
 			}
 			break;
 		case 5:
 			for (Employee employee : employeeDB) {
 				if (employee instanceof Waiter) {
-					System.out.println(employee);
+					localDB.add(employee);
 				}
+
 			}
 			break;
 		default:
 			System.out.println("Unkown error");
 
+		}
+
+		if (!(localDB.isEmpty())) {
+			for (Employee employee : localDB) {
+				System.out.println("\n" + employee);
+			}
+		} else {
+			System.out.println("\nNo such employees on staff.");
 		}
 
 	}
@@ -369,14 +383,14 @@ public class EmployeeManagement {
 		}
 
 	}
-        
-        public static void displayAverageAge(){
-            double totalAge = 0;
-            for (Employee employee : employeeDB) {
-                totalAge += employee.calculateAge();
-            }
-            
-            System.out.println("The average age is: " + (int)(totalAge/employeeDB.size()));
-        }
+
+	public static void displayAverageAge() {
+		double totalAge = 0;
+		for (Employee employee : employeeDB) {
+			totalAge += employee.calculateAge();
+		}
+
+		System.out.println("The average age is: " + (int) (totalAge / employeeDB.size()));
+	}
 
 }
