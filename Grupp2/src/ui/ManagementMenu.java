@@ -11,7 +11,7 @@ class ManagementMenu {
 
         while (!previous) {
             printMenu();
-            performAction(Utilities.getInput(0, 10));
+            performAction(Utilities.getInput(0, 11));
         }
     }
 
@@ -33,6 +33,7 @@ class ManagementMenu {
         System.out.println("8. Search employee by role");
         System.out.println("9. Display all employees");
         System.out.println("10. Put employees to work");
+        System.out.println("11. Load database");
         System.out.println("0. Return to previous menu");
     }
 
@@ -71,6 +72,9 @@ class ManagementMenu {
                 break;
             case 10:
                 EmployeeManagement.putToWork();
+                break;
+            case 11:
+                EmployeeManagement.loadDB();
                 break;
             default:
                 System.out.println("\nUnknown error...");
