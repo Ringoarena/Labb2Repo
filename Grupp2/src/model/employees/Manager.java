@@ -1,9 +1,11 @@
 package model.employees;
 
+import java.time.LocalDate;
+
 public class Manager extends Employee {
 	
 	private int noOfPeopleFired;
-    public Manager(String name, String dob, GenderType gender) {
+    public Manager(String name, LocalDate dob, GenderType gender) {
         super(name, dob, gender);
         setSalary(18000);
     }

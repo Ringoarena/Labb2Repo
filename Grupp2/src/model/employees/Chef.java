@@ -1,10 +1,11 @@
 package model.employees;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 public class Chef extends Employee{
     int noOfDrinksDuringWork;
-    public Chef(String name, String dob, GenderType gender) {
+    public Chef(String name, LocalDate dob, GenderType gender) {
         super(name, dob, gender);
         setSalary(15000);
     }

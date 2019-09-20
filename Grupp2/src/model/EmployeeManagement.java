@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -13,9 +14,9 @@ public class EmployeeManagement {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void loadDB() {
-		employeeDB.add(new Waiter("Rikard", "1990-09-25", GenderType.MALE));
-		employeeDB.add(new Chef("Johannes", "1930-09-25", GenderType.MALE));
-		employeeDB.add(new Bartender("Mattias", "1200-09-25", GenderType.MALE));
+		employeeDB.add(new Waiter("Rikard", LocalDate.parse("1990-09-25"), GenderType.MALE));
+		employeeDB.add(new Chef("Johannes", LocalDate.parse("1991-09-25"), GenderType.MALE));
+		employeeDB.add(new Bartender("Mattias", LocalDate.parse("1985-09-25"), GenderType.MALE));
 		putToWork();
 	}
 
@@ -26,7 +27,8 @@ public class EmployeeManagement {
 
 		// TODO
 		System.out.println("Enter DOB (yyyy-mm-dd)");
-		String dob = sc.nextLine();
+		String s = sc.nextLine();
+                LocalDate dob = LocalDate.parse(s);
 
 		System.out.println("Enter employee gender");
 		System.out.println("1. Female");
@@ -126,7 +128,7 @@ public class EmployeeManagement {
 			Employee foundEmployee = getEmployeeByID(id);
 			System.out.println("Enter new Date of birth: (yyyy-mm-dd): ");
 			String dob = sc.nextLine();
-			foundEmployee.setDob(dob);
+			foundEmployee.setDob(LocalDate.parse(dob));
 		} catch (EmployeeNotFoundException e) {
 			System.out.println("Couldn't find the employee with ID: " + id);
 		}
@@ -367,5 +369,14 @@ public class EmployeeManagement {
 		}
 
 	}
+        
+        public static void displayAverageAge(){
+            double totalAge = 0;
+            for (Employee employee : employeeDB) {
+                totalAge += employee.calculateAge();
+            }
+            
+            System.out.println("The average age is: " + (int)(totalAge/employeeDB.size()));
+        }
 
 }
