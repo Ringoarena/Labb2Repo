@@ -1,13 +1,10 @@
 package ui;
 
-import model.EmployeeManagement;
-
 public class MainMenu {
     private static boolean exit;
 
     public static void main(String[] args) {
         printHeader();
-        EmployeeManagement.loadDB();
         while (!exit) {
             printMenu();
             performAction(Utilities.getInput(0, 2));
