@@ -7,14 +7,14 @@ import static java.time.temporal.ChronoUnit.*;
 public abstract class Employee {
 
     private String name;
-    private String dob;
+    private LocalDate dob;
     private int ID;
     private double salary;
     private GenderType gender;
 
     private static int IDGenerator;
 
-    public Employee(String name, String dob, GenderType gender) {
+    public Employee(String name, LocalDate dob, GenderType gender) {
         this.name = name;
         this.dob = dob;
         this.gender = gender;
@@ -33,11 +33,11 @@ public abstract class Employee {
         this.name = name;
     }
 
-    public String getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
@@ -63,8 +63,7 @@ public abstract class Employee {
     }
 
     public long calculateAge(){
-        LocalDate birthdate = LocalDate.parse(dob);
         LocalDate now = LocalDate.now();
-        return YEARS.between(birthdate, now);
+        return YEARS.between(dob, now);
     }
 }

@@ -1,12 +1,13 @@
 package model.employees;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 public class HR extends Employee {
 
 	private int noOfPeopleRecruited;
 	
-    public HR(String name, String dob, GenderType gender) {
+    public HR(String name, LocalDate dob, GenderType gender) {
         super(name, dob, gender);
         setSalary(16000);
     }

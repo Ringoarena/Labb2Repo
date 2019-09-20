@@ -1,10 +1,12 @@
 package model.employees;
 
+import java.time.LocalDate;
+
 public class Bartender extends Employee {
 
 	
 	private int cocktailServed;
-    public Bartender(String name, String dob, GenderType gender) {
+    public Bartender(String name, LocalDate dob, GenderType gender) {
         super(name, dob, gender);
         setSalary(13000);
 

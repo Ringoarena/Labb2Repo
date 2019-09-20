@@ -1,12 +1,13 @@
 package model.employees;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 public class Waiter extends Employee {
 
 	private double tip;
 
-	public Waiter(String name, String dob, GenderType gender) {
+	public Waiter(String name, LocalDate dob, GenderType gender) {
 		super(name, dob, gender);
 		setSalary(10000);
 	}
