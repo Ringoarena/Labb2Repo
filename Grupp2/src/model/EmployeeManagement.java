@@ -367,5 +367,14 @@ public class EmployeeManagement {
 		}
 
 	}
+        
+        public static void displayAverageAge(){
+            double totalAge = 0;
+            for (Employee employee : employeeDB) {
+                totalAge += employee.calculateAge();
+            }
+            
+            System.out.println("The average age is: " + (int)(totalAge/employeeDB.size()));
+        }
 
 }

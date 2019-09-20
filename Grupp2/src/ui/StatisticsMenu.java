@@ -11,7 +11,7 @@ class StatisticsMenu {
 
         while (!previous) {
             printMenu();
-            performAction(Utilities.getInput(0, 6));
+            performAction(Utilities.getInput(0, 7));
         }
     }
 
@@ -29,6 +29,7 @@ class StatisticsMenu {
         System.out.println("4. Total bonus");
         System.out.println("5. Percentage women");
         System.out.println("6. Percentage men per role");
+        System.out.println("7. Average age");
         System.out.println("0. Return to previous menu");
     }
 
@@ -55,6 +56,9 @@ class StatisticsMenu {
                 break;
             case 6:
                 EmployeeManagement.displayPercentageMenPerRole();
+                break;
+            case 7:
+                EmployeeManagement.displayAverageAge();
                 break;
             default:
                 System.out.println("\nUnknown error...");

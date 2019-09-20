@@ -55,7 +55,7 @@ public abstract class Employee {
     
     public GenderType getGender(){
         return this.gender;
-    }
+    }       
 
     @Override
     public String toString() {
