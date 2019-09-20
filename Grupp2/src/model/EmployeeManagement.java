@@ -14,9 +14,28 @@ public class EmployeeManagement {
 	private static Scanner sc = new Scanner(System.in);
 
 	public static void loadDB() {
-		employeeDB.add(new Waiter("Rikard", LocalDate.parse("1990-09-25"), GenderType.MALE));
-		employeeDB.add(new Chef("Johannes", LocalDate.parse("1991-09-25"), GenderType.MALE));
-		employeeDB.add(new Bartender("Mattias", LocalDate.parse("1985-09-25"), GenderType.MALE));
+		employeeDB.add(new Waiter("Rikard", LocalDate.of(1990,9,25), GenderType.MALE));
+		employeeDB.add(new Waiter("Pelle", LocalDate.of(1992,2,12), GenderType.MALE));
+		employeeDB.add(new Waiter("Maja", LocalDate.of(1989,9,25), GenderType.FEMALE));
+		employeeDB.add(new Waiter("Anna", LocalDate.of(1993,9,25), GenderType.FEMALE));
+		employeeDB.add(new Waiter("Sara", LocalDate.of(1987,9,25), GenderType.FEMALE));
+		employeeDB.add(new Waiter("Emma", LocalDate.of(1986,9,25), GenderType.FEMALE));
+                
+		employeeDB.add(new Chef("Johannes", LocalDate.of(1991,9,25), GenderType.MALE));
+		employeeDB.add(new Chef("Peter", LocalDate.of(1989,9,25), GenderType.MALE));
+		employeeDB.add(new Chef("Tina", LocalDate.of(1991,9,25), GenderType.FEMALE));
+                
+		employeeDB.add(new Bartender("Mattias", LocalDate.of(1985,9,25), GenderType.MALE));
+		employeeDB.add(new Bartender("Sam", LocalDate.of(1987,3,25), GenderType.MALE));
+		employeeDB.add(new Bartender("Lina", LocalDate.of(1991,5,25), GenderType.FEMALE));
+                
+		employeeDB.add(new Manager("Göran", LocalDate.of(1964,9,25), GenderType.MALE));
+		employeeDB.add(new Manager("Simon", LocalDate.of(1975,9,25), GenderType.MALE));
+                
+		employeeDB.add(new HR("Gunnel", LocalDate.of(1962,9,25), GenderType.FEMALE));
+		employeeDB.add(new HR("Berit", LocalDate.of(1965,9,25), GenderType.FEMALE));
+		employeeDB.add(new HR("Sören", LocalDate.of(1968,9,25), GenderType.MALE));
+                
 		putToWork();
 	}
 
