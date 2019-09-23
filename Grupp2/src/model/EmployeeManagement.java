@@ -1,10 +1,20 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-import model.employees.*;
+
+import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
+
+import model.employees.Bartender;
+import model.employees.Chef;
+import model.employees.Employee;
+import model.employees.GenderType;
+import model.employees.HR;
+import model.employees.Manager;
+import model.employees.Waiter;
 import model.exception.EmployeeNotFoundException;
 import ui.Utilities;
 
@@ -38,20 +48,30 @@ public class EmployeeManagement {
     }
 
     public static void addEmployee() {
-
+    	
         System.out.println("Enter employee name");
         String name = sc.nextLine();
+        LocalDate dob = null;
+        
+        
+        while(true) {
+        
+        	try{
+        		System.out.println("Enter DOB (yyyy-mm-dd)");
+        		String s = sc.nextLine();
+        		dob = LocalDate.parse(s);
+        		break;
+        	}catch(DateTimeParseException e) {
+        		System.out.println("Illegal input!");
+        	}
 
-        // TODO
-        System.out.println("Enter DOB (yyyy-mm-dd)");
-        String s = sc.nextLine();
-        LocalDate dob = LocalDate.parse(s);
-
+        }
+        
         System.out.println("Enter employee gender");
         System.out.println("1. Female");
         System.out.println("2. Male");
         System.out.println("3. Other");
-        int gender = Utilities.getInput(1, 3);
+        int gender = Utilities.getMenuInput(1, 3);
 
         GenderType newEmployeeGender = null;
         switch (gender) {
@@ -75,64 +95,94 @@ public class EmployeeManagement {
         System.out.println("3. Chef");
         System.out.println("4. Bartender");
         System.out.println("5. Waiter");
-        int role = Utilities.getInput(1, 5);
+        int role = Utilities.getMenuInput(1, 5);
 
+        Employee newEmployee = null;
         switch (role) {
             case 1:
-                employeeDB.add(new Manager(name, dob, newEmployeeGender));
+            	newEmployee = new Manager(name, dob, newEmployeeGender);
                 break;
             case 2:
-                employeeDB.add(new HR(name, dob, newEmployeeGender));
+            	newEmployee = new HR(name, dob, newEmployeeGender);
                 break;
             case 3:
-                employeeDB.add(new Chef(name, dob, newEmployeeGender));
+            	newEmployee = new Chef(name, dob, newEmployeeGender);
                 break;
             case 4:
-                employeeDB.add(new Bartender(name, dob, newEmployeeGender));
+            	newEmployee = new Bartender(name, dob, newEmployeeGender);
                 break;
             case 5:
-                employeeDB.add(new Waiter(name, dob, newEmployeeGender));
+                newEmployee = new Waiter(name, dob, newEmployeeGender);
                 break;
             default:
                 System.out.println("Unknown error!");
         }
+        
+        System.out.println("A new employee was now added: " + newEmployee.toString());
     }
 
     public static int getSize() {
         return employeeDB.size();
     }
+    public static String fixLength(String s, int l) {
+        if(s.length() < l) {
+            for(int i = s.length(); i < l + 1; i++) {
+                s = s + " ";
+            }
 
+        }else if(s.length() > l) {
+            return s.substring(0, l +1);
+        }
+        return s;
+    }
+    
+    
+    
     public static void displayAllEmployees() {
+        System.out.print(fixLength("ID", 3));
+        System.out.print(fixLength("Name", 10));
+        System.out.print(fixLength("Date of birth", 15));
+        System.out.print(fixLength("Salary", 10));
+        System.out.print(fixLength("Gender", 7));
+        System.out.println("");
         for (Employee emp : employeeDB) {
-            System.out.println(emp.toString());
+            System.out.print(fixLength(Integer.toString(emp.getID()),3));
+            System.out.print(fixLength(emp.getName(),10));
+            System.out.print(fixLength(emp.getDob().toString(),15));
+            System.out.print(fixLength(Double.toString(emp.getSalary()),10));
+            System.out.print(fixLength(emp.getGender().toString(),7));
+            System.out.println();
+
         }
     }
 
     public static void deleteEmployeeByID() {
         System.out.println("What is the ID of the employee you wish to remove?");
-        int id = Integer.parseInt(sc.nextLine());
+        int id = Utilities.getIntegerInput();
         Employee tmp = null;
         // trådsäker metod
-        for (Employee emp : employeeDB) {
-            if (emp.getID() == id) {
-                tmp = emp;
-                break;
-            } else {
-                System.out.println("ID not found.");
-            }
+        
+        try {
+            tmp = getEmployeeByID(id);
+            employeeDB.remove(tmp);
+            System.out.println("Employee with id " + id + " was removed");
+        } catch (EmployeeNotFoundException e) {
+            System.out.println("Couldn't find the employee with ID: " + id);
         }
-        employeeDB.remove(tmp);
     }
 
     public static void updateNameByID() {
         System.out.println("What is the ID of the employee?");
-        int id = Integer.parseInt(sc.nextLine());
+        int id = Utilities.getIntegerInput();
 
         try {
+        	
             Employee foundEmployee = getEmployeeByID(id);
+            String oldName = foundEmployee.getName();
             System.out.println("Enter new name: ");
             String name = sc.nextLine();
             foundEmployee.setName(name);
+            System.out.println("The employee with ID: " + id + ". Name changed from " + oldName + " to " + foundEmployee.getName());
         } catch (EmployeeNotFoundException e) {
             System.out.println("Couldn't find the employee with ID: " + id);
         }
@@ -140,27 +190,38 @@ public class EmployeeManagement {
 
     public static void updateDobByID() {
         System.out.println("What is the ID of the employee?");
-        int id = Integer.parseInt(sc.nextLine());
-
+        int id = Utilities.getIntegerInput();
+        while(true) {
         try {
             Employee foundEmployee = getEmployeeByID(id);
+            LocalDate oldDob = foundEmployee.getDob();
             System.out.println("Enter new Date of birth: (yyyy-mm-dd): ");
             String dob = sc.nextLine();
             foundEmployee.setDob(LocalDate.parse(dob));
+            System.out.println("The employee with ID: " + id + ". DOB changed from " + oldDob + " to " + foundEmployee.getDob());
+            break;
         } catch (EmployeeNotFoundException e) {
             System.out.println("Couldn't find the employee with ID: " + id);
+        } catch (DateTimeParseException  e) {
+        	System.out.println("Illegal dateformat!");
+		}
         }
     }
 
     public static void updateSalaryByID() {
         System.out.println("What is the ID of the employee?");
-        int id = Integer.parseInt(sc.nextLine());
-
+        int id = Utilities.getIntegerInput();
+       
+        
+        
         try {
             Employee foundEmployee = getEmployeeByID(id);
+            double oldSalary = foundEmployee.getSalary();
             System.out.println("Enter new salary: ");
             double salary = Double.parseDouble(sc.nextLine());
             foundEmployee.setSalary(salary);
+            System.out.println("The employee with ID: " + id + ". Salary changed from " + oldSalary + " to " + foundEmployee.getSalary());
+            
         } catch (EmployeeNotFoundException e) {
             System.out.println("Couldn't find the employee with ID: " + id);
         }
@@ -184,7 +245,7 @@ public class EmployeeManagement {
 
     public static void searchByID() {
         System.out.println("What is the ID of the employee?");
-        int id = Integer.parseInt(sc.nextLine());
+        int id = Utilities.getIntegerInput();
 
         // Anropar korrekt toString enligt polymorfism
         try {
@@ -226,7 +287,7 @@ public class EmployeeManagement {
         System.out.println("4. Manager");
         System.out.println("5. Waiter");
 
-        int choice = Utilities.getInput(1, 5);
+        int choice = Utilities.getMenuInput(1, 5);
 
         switch (choice) {
             case 1:
@@ -281,60 +342,6 @@ public class EmployeeManagement {
         }
 
     }
-
-//    public static void searchByRole() {
-//
-//        System.out.println("Which role do you want to find?");
-//        System.out.println("1. Bartender");
-//        System.out.println("2. Chef");
-//        System.out.println("3. HR rep");
-//        System.out.println("4. Manager");
-//        System.out.println("5. Waiter");
-//
-//        int choice = Utilities.getInput(1, 5);
-//
-//        switch (choice) {
-//            case 1:
-//                for (Employee employee : employeeDB) {
-//                    if (employee instanceof Bartender) {
-//                        System.out.println(employee);
-//                    }
-//                }
-//                break;
-//            case 2:
-//                for (Employee employee : employeeDB) {
-//                    if (employee instanceof Chef) {
-//                        System.out.println(employee);
-//                    }
-//                }
-//                break;
-//            case 3:
-//                for (Employee employee : employeeDB) {
-//                    if (employee instanceof HR) {
-//                        System.out.println(employee);
-//                    }
-//                }
-//                break;
-//            case 4:
-//                for (Employee employee : employeeDB) {
-//                    if (employee instanceof Manager) {
-//                        System.out.println(employee);
-//                    }
-//                }
-//                break;
-//            case 5:
-//                for (Employee employee : employeeDB) {
-//                    if (employee instanceof Waiter) {
-//                        System.out.println(employee);
-//                    }
-//                }
-//                break;
-//            default:
-//                System.out.println("Unkown error");
-//
-//        }
-//
-//    }
 
     public static void displayAverageWage() {
         double totalWage = 0;

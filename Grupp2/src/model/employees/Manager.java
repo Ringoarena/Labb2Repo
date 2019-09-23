@@ -15,8 +15,7 @@ public class Manager extends Employee {
     public double bonus() {
     	double bonus = 2500;
     	if(noOfPeopleFired<5) {
-    		System.out.println("Well done you didn't fire too many people this year! Here is your bonus");
-    		return bonus;
+    		return bonus+=2500;
     	}
         return 0;
     }

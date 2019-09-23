@@ -3,9 +3,9 @@ package ui;
 import java.util.Scanner;
 
 public class Utilities {
-
-    public static int getInput(int lowEnd, int highEnd) {
-        Scanner sc = new Scanner(System.in);
+	private static Scanner sc = new Scanner(System.in);
+    public static int getMenuInput(int lowEnd, int highEnd) {
+        
         int decision = -1;
         while (!(lowEnd <= decision && decision <= highEnd)) {
             System.out.print("Enter decision: ");
@@ -19,4 +19,17 @@ public class Utilities {
         }
         return decision;
     }
+    public static int getIntegerInput() throws NumberFormatException{
+    	
+    		while(true) {
+    			try {
+    				String input = sc.nextLine();
+    				return Integer.parseInt(input);
+    			}catch(NumberFormatException e) {
+    				System.out.println("Ilegal input");
+    			}
+    			
+    		}
+    }
+    
 }

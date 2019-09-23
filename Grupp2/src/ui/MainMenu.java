@@ -7,7 +7,7 @@ public class MainMenu {
         printHeader();
         while (!exit) {
             printMenu();
-            performAction(Utilities.getInput(0, 2));
+            performAction(Utilities.getMenuInput(0, 2));
         }
     }
 
