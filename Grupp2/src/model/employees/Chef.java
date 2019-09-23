@@ -3,6 +3,8 @@ package model.employees;
 import java.time.LocalDate;
 import java.util.Random;
 
+import ui.Utilities;
+
 public class Chef extends Employee{
     int noOfDrinksDuringWork;
     public Chef(String name, LocalDate dob, GenderType gender) {
@@ -23,7 +25,7 @@ public class Chef extends Employee{
 
     @Override
     public String toString(){
-        return super.toString() + ", Drinks during work: " + noOfDrinksDuringWork;
+        return super.toString() + Utilities.fixLength("No of drinks "+noOfDrinksDuringWork, 15) ;
     }
 
 	@Override

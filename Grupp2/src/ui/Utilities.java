@@ -32,4 +32,16 @@ public class Utilities {
     		}
     }
     
+    public static String fixLength(String s, int l) {
+        if(s.length() < l) {
+            for(int i = s.length(); i < l + 1; i++) {
+                s = s + " ";
+            }
+
+        }else if(s.length() > l) {
+            return s.substring(0, l +1);
+        }
+        return s;
+    }
+    
 }

@@ -3,6 +3,8 @@ package model.employees;
 import java.time.LocalDate;
 import java.util.Random;
 
+import ui.Utilities;
+
 public class HR extends Employee {
 
 	private int noOfPeopleRecruited;
@@ -24,7 +26,7 @@ public class HR extends Employee {
 
     @Override
     public String toString(){
-        return super.toString() + ", People recruited: " + noOfPeopleRecruited;
+        return super.toString() + Utilities.fixLength("People recruited "+noOfPeopleRecruited, 20) ;
     }
     
 
