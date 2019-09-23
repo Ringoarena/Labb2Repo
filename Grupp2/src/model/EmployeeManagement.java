@@ -172,7 +172,7 @@ public class EmployeeManagement {
         boolean foundName = false;
 
         for (Employee employee : employeeDB) {
-            if (inputName.equals(employee.getName())) {
+            if (inputName.equalsIgnoreCase(employee.getName())) {
                 System.out.println(employee.toString());
                 foundName = true;
             }
