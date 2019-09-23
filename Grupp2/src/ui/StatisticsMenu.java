@@ -11,7 +11,7 @@ class StatisticsMenu {
 
         while (!previous) {
             printMenu();
-            performAction(Utilities.getInput(0, 7));
+            performAction(Utilities.getMenuInput(0, 7));
         }
     }
 

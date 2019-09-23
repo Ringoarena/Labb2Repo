@@ -13,11 +13,9 @@ public class Chef extends Employee{
     @Override
     public double bonus() {
     	if(noOfDrinksDuringWork<10) {
-    		System.out.println("Well done, you managed to stay away from the bottle!");
-    		return 2000;	
+    		return bonus+=2000;	
     	}
     	else {
-    		System.out.println("This is an intervention, we just want you healthy.");
     		return 0;
     	}
     	

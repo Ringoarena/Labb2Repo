@@ -11,6 +11,8 @@ public abstract class Employee {
     private int ID;
     private double salary;
     private GenderType gender;
+    protected double bonus;
+    
 
     private static int IDGenerator;
 
@@ -19,6 +21,10 @@ public abstract class Employee {
         this.dob = dob;
         this.gender = gender;
         this.ID = ++IDGenerator;
+    }
+    
+    public double getBonus() {
+    	return bonus;
     }
 
     public abstract double bonus();

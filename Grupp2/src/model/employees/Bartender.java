@@ -15,8 +15,7 @@ public class Bartender extends Employee {
     @Override
     public double bonus() {
     	if(cocktailServed>55) {
-    		System.out.println("You did well this year, here's your bonus!");
-    		return 3000;
+    		return bonus+=3000;
     	}
         return 0;
     }

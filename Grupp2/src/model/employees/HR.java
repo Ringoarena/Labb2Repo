@@ -15,11 +15,9 @@ public class HR extends Employee {
     @Override
     public double bonus() {
         if(noOfPeopleRecruited>10) {
-        	System.out.println("Congratulations on fixing the new recuits!");
-        	return 2000;
+        	return bonus+=2000;
         }
         else {
-        	System.out.println("You have to work hard nextYear");
         	return 0;
         }
     }

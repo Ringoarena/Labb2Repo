@@ -11,7 +11,7 @@ class ManagementMenu {
 
         while (!previous) {
             printMenu();
-            performAction(Utilities.getInput(0, 11));
+            performAction(Utilities.getMenuInput(0, 11));
         }
     }
 
