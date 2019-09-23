@@ -3,6 +3,8 @@ package model.employees;
 import java.time.LocalDate;
 import java.util.Random;
 
+import ui.Utilities;
+
 public class Waiter extends Employee {
 
 	private double tip;
@@ -31,7 +33,7 @@ public class Waiter extends Employee {
 
 	@Override
 	public String toString() {
-		return super.toString() + ", Tip: " + tip;
+		return super.toString() + Utilities.fixLength("Tip: "+tip, 15) ;
 	}
 
 	@Override

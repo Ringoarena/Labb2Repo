@@ -2,6 +2,8 @@ package model.employees;
 
 import java.time.LocalDate;
 
+import ui.Utilities;
+
 public class Bartender extends Employee {
 
 	
@@ -22,7 +24,7 @@ public class Bartender extends Employee {
 
     @Override
     public String toString(){
-        return super.toString() + ", Cocktails served: " + cocktailServed;
+        return super.toString() + Utilities.fixLength("Drinks served "+cocktailServed, 15) ;
     }
 
 	@Override

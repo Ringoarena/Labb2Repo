@@ -2,6 +2,8 @@ package model.employees;
 
 import java.time.LocalDate;
 
+import ui.Utilities;
+
 public class Manager extends Employee {
 	
 	private int noOfPeopleFired;
@@ -22,7 +24,7 @@ public class Manager extends Employee {
 
     @Override
     public String toString(){
-        return super.toString() + ", People fired: " + noOfPeopleFired;
+        return super.toString() +  Utilities.fixLength("People fired "+noOfPeopleFired, 15) ;
     }
     
 	@Override

@@ -2,6 +2,8 @@ package model.employees;
 
 import java.time.LocalDate;
 
+import ui.Utilities;
+
 import static java.time.temporal.ChronoUnit.*;
 
 public abstract class Employee {
@@ -65,7 +67,8 @@ public abstract class Employee {
 
     @Override
     public String toString() {
-        return "Name: " + name + ", Date of birth: " + dob + ", ID: " + ID + ", Salary: " + salary + ", Gender: " + gender;
+        return Utilities.fixLength(""+ID, 3) + Utilities.fixLength(name, 10) + Utilities.fixLength(""+dob, 15)
+         + Utilities.fixLength(""+salary, 10) + Utilities.fixLength(""+gender, 7);
     }
 
     public long calculateAge(){

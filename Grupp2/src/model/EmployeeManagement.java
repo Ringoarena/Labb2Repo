@@ -117,42 +117,27 @@ public class EmployeeManagement {
             default:
                 System.out.println("Unknown error!");
         }
-        
+        employeeDB.add(newEmployee);
         System.out.println("A new employee was now added: " + newEmployee.toString());
     }
 
     public static int getSize() {
         return employeeDB.size();
     }
-    public static String fixLength(String s, int l) {
-        if(s.length() < l) {
-            for(int i = s.length(); i < l + 1; i++) {
-                s = s + " ";
-            }
-
-        }else if(s.length() > l) {
-            return s.substring(0, l +1);
-        }
-        return s;
-    }
+   
     
     
     
     public static void displayAllEmployees() {
-        System.out.print(fixLength("ID", 3));
-        System.out.print(fixLength("Name", 10));
-        System.out.print(fixLength("Date of birth", 15));
-        System.out.print(fixLength("Salary", 10));
-        System.out.print(fixLength("Gender", 7));
+        System.out.print(Utilities.fixLength("ID", 3));
+        System.out.print(Utilities.fixLength("Name", 10));
+        System.out.print(Utilities.fixLength("Date of birth", 15));
+        System.out.print(Utilities.fixLength("Salary", 10));
+        System.out.print(Utilities.fixLength("Gender", 7));
+        System.out.print(Utilities.fixLength("Unique attribute", 15));
         System.out.println("");
         for (Employee emp : employeeDB) {
-            System.out.print(fixLength(Integer.toString(emp.getID()),3));
-            System.out.print(fixLength(emp.getName(),10));
-            System.out.print(fixLength(emp.getDob().toString(),15));
-            System.out.print(fixLength(Double.toString(emp.getSalary()),10));
-            System.out.print(fixLength(emp.getGender().toString(),7));
-            System.out.println();
-
+            System.out.println(emp.toString());
         }
     }
 
