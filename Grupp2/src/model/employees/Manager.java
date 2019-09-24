@@ -1,7 +1,6 @@
 package model.employees;
 
 import java.time.LocalDate;
-
 import ui.Utilities;
 
 public class Manager extends Employee {
@@ -12,12 +11,11 @@ public class Manager extends Employee {
         setSalary(18000);
     }
     
-    private int test;
     @Override
     public double bonus() {
     	double bonus = 2500;
     	if(noOfPeopleFired<5) {
-    		return bonus+=2500;
+    		return bonus + 2500;
     	}
         return 0;
     }

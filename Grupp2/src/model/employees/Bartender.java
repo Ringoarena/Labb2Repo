@@ -1,17 +1,14 @@
 package model.employees;
 
 import java.time.LocalDate;
-
 import ui.Utilities;
 
 public class Bartender extends Employee {
-
-	
 	private int cocktailServed;
+
     public Bartender(String name, LocalDate dob, GenderType gender) {
         super(name, dob, gender);
         setSalary(13000);
-
     }
 
     @Override

@@ -28,7 +28,6 @@ public class Waiter extends Employee {
 		int tip = rnd.nextInt(11) + 10;
 		System.out.println("You got " + tip + "$ in tip");
 		this.tip += tip;
-		
 	}
 
 	@Override

@@ -2,11 +2,11 @@ package model.employees;
 
 import java.time.LocalDate;
 import java.util.Random;
-
 import ui.Utilities;
 
 public class Chef extends Employee{
-    int noOfDrinksDuringWork;
+    private int noOfDrinksDuringWork;
+
     public Chef(String name, LocalDate dob, GenderType gender) {
         super(name, dob, gender);
         setSalary(15000);
@@ -20,7 +20,6 @@ public class Chef extends Employee{
     	else {
     		return 0;
     	}
-    	
     }
 
     @Override
@@ -36,7 +35,5 @@ public class Chef extends Employee{
 			System.out.println("Jeez this is very taxing, I think I need a drink");
 			noOfDrinksDuringWork++;
 		}
-		
-		
-		}
+    }
 }

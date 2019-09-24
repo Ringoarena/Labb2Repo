@@ -1,9 +1,7 @@
 package model.employees;
 
 import java.time.LocalDate;
-
 import ui.Utilities;
-
 import static java.time.temporal.ChronoUnit.*;
 
 public abstract class Employee {
@@ -13,20 +11,15 @@ public abstract class Employee {
     private int ID;
     private double salary;
     private GenderType gender;
-    protected double bonus;
-    
+    double bonus;
 
     private static int IDGenerator;
 
-    public Employee(String name, LocalDate dob, GenderType gender) {
+    Employee(String name, LocalDate dob, GenderType gender) {
         this.name = name;
         this.dob = dob;
         this.gender = gender;
         this.ID = ++IDGenerator;
-    }
-    
-    public double getBonus() {
-    	return bonus;
     }
 
     public abstract double bonus();

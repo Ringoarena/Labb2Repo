@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
-
-import com.sun.corba.se.impl.javax.rmi.CORBA.Util;
 
 import model.employees.Bartender;
 import model.employees.Chef;
@@ -21,7 +18,6 @@ import ui.Utilities;
 public class EmployeeManagement {
 
     private static ArrayList<Employee> employeeDB = new ArrayList<>();
-    private static Scanner sc = new Scanner(System.in);
 
     public static void loadDB() {
         employeeDB.add(new Waiter("Rikard", LocalDate.of(1990, 9, 25), GenderType.MALE));
@@ -48,33 +44,29 @@ public class EmployeeManagement {
     }
 
     public static void addEmployee() {
-    	
-        System.out.println("Enter employee name");
-        String name = sc.nextLine();
-        LocalDate dob = null;
-        
-        
-        while(true) {
-        
-        	try{
-        		System.out.println("Enter DOB (yyyy-mm-dd)");
-        		String s = sc.nextLine();
-        		dob = LocalDate.parse(s);
-        		break;
-        	}catch(DateTimeParseException e) {
-        		System.out.println("Illegal input!");
-        	}
+        String name;
+        LocalDate dob;
+        GenderType newEmployeeGender = null;
+        Employee newEmployee = null;
 
+        System.out.println("Enter employee name");
+        name = Utilities.sc.nextLine();
+        while (true) {
+            try {
+                System.out.println("Enter DOB (yyyy-mm-dd)");
+                String s = Utilities.sc.nextLine();
+                dob = LocalDate.parse(s);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Illegal input!");
+            }
         }
-        
+
         System.out.println("Enter employee gender");
         System.out.println("1. Female");
         System.out.println("2. Male");
         System.out.println("3. Other");
-        int gender = Utilities.getMenuInput(1, 3);
-
-        GenderType newEmployeeGender = null;
-        switch (gender) {
+        switch (Utilities.getMenuInput(1, 3)) {
             case 1:
                 newEmployeeGender = GenderType.FEMALE;
                 break;
@@ -95,21 +87,18 @@ public class EmployeeManagement {
         System.out.println("3. Chef");
         System.out.println("4. Bartender");
         System.out.println("5. Waiter");
-        int role = Utilities.getMenuInput(1, 5);
-
-        Employee newEmployee = null;
-        switch (role) {
+        switch (Utilities.getMenuInput(1, 5)) {
             case 1:
-            	newEmployee = new Manager(name, dob, newEmployeeGender);
+                newEmployee = new Manager(name, dob, newEmployeeGender);
                 break;
             case 2:
-            	newEmployee = new HR(name, dob, newEmployeeGender);
+                newEmployee = new HR(name, dob, newEmployeeGender);
                 break;
             case 3:
-            	newEmployee = new Chef(name, dob, newEmployeeGender);
+                newEmployee = new Chef(name, dob, newEmployeeGender);
                 break;
             case 4:
-            	newEmployee = new Bartender(name, dob, newEmployeeGender);
+                newEmployee = new Bartender(name, dob, newEmployeeGender);
                 break;
             case 5:
                 newEmployee = new Waiter(name, dob, newEmployeeGender);
@@ -118,16 +107,9 @@ public class EmployeeManagement {
                 System.out.println("Unknown error!");
         }
         employeeDB.add(newEmployee);
-        System.out.println("A new employee was now added: " + newEmployee.toString());
+        System.out.println("A new employee has been added: " + newEmployee.toString());
     }
 
-    public static int getSize() {
-        return employeeDB.size();
-    }
-   
-    
-    
-    
     public static void displayAllEmployees() {
         System.out.print(Utilities.fixLength("ID", 3));
         System.out.print(Utilities.fixLength("Name", 10));
@@ -135,21 +117,20 @@ public class EmployeeManagement {
         System.out.print(Utilities.fixLength("Salary", 10));
         System.out.print(Utilities.fixLength("Gender", 7));
         System.out.print(Utilities.fixLength("Unique attribute", 15));
-        System.out.println("");
+        System.out.println();
         for (Employee emp : employeeDB) {
             System.out.println(emp.toString());
         }
     }
 
     public static void deleteEmployeeByID() {
+        Employee temp;
+
         System.out.println("What is the ID of the employee you wish to remove?");
         int id = Utilities.getIntegerInput();
-        Employee tmp = null;
-        // trådsäker metod
-        
         try {
-            tmp = getEmployeeByID(id);
-            employeeDB.remove(tmp);
+            temp = getEmployeeByID(id);
+            employeeDB.remove(temp);
             System.out.println("Employee with id " + id + " was removed");
         } catch (EmployeeNotFoundException e) {
             System.out.println("Couldn't find the employee with ID: " + id);
@@ -159,13 +140,11 @@ public class EmployeeManagement {
     public static void updateNameByID() {
         System.out.println("What is the ID of the employee?");
         int id = Utilities.getIntegerInput();
-
         try {
-        	
             Employee foundEmployee = getEmployeeByID(id);
             String oldName = foundEmployee.getName();
             System.out.println("Enter new name: ");
-            String name = sc.nextLine();
+            String name = Utilities.sc.nextLine();
             foundEmployee.setName(name);
             System.out.println("The employee with ID: " + id + ". Name changed from " + oldName + " to " + foundEmployee.getName());
         } catch (EmployeeNotFoundException e) {
@@ -176,37 +155,33 @@ public class EmployeeManagement {
     public static void updateDobByID() {
         System.out.println("What is the ID of the employee?");
         int id = Utilities.getIntegerInput();
-        while(true) {
-        try {
-            Employee foundEmployee = getEmployeeByID(id);
-            LocalDate oldDob = foundEmployee.getDob();
-            System.out.println("Enter new Date of birth: (yyyy-mm-dd): ");
-            String dob = sc.nextLine();
-            foundEmployee.setDob(LocalDate.parse(dob));
-            System.out.println("The employee with ID: " + id + ". DOB changed from " + oldDob + " to " + foundEmployee.getDob());
-            break;
-        } catch (EmployeeNotFoundException e) {
-            System.out.println("Couldn't find the employee with ID: " + id);
-        } catch (DateTimeParseException  e) {
-        	System.out.println("Illegal dateformat!");
-		}
+        while (true) {
+            try {
+                Employee foundEmployee = getEmployeeByID(id);
+                LocalDate oldDob = foundEmployee.getDob();
+                System.out.println("Enter new Date of birth: (yyyy-mm-dd): ");
+                String dob = Utilities.sc.nextLine();
+                foundEmployee.setDob(LocalDate.parse(dob));
+                System.out.println("The employee with ID: " + id + ". DOB changed from " + oldDob + " to " + foundEmployee.getDob());
+                break;
+            } catch (EmployeeNotFoundException e) {
+                System.out.println("Couldn't find the employee with ID: " + id);
+            } catch (DateTimeParseException e) {
+                System.out.println("Illegal dateformat!");
+            }
         }
     }
 
     public static void updateSalaryByID() {
         System.out.println("What is the ID of the employee?");
         int id = Utilities.getIntegerInput();
-       
-        
-        
         try {
             Employee foundEmployee = getEmployeeByID(id);
             double oldSalary = foundEmployee.getSalary();
             System.out.println("Enter new salary: ");
-            double salary = Double.parseDouble(sc.nextLine());
+            double salary = Double.parseDouble(Utilities.sc.nextLine());
             foundEmployee.setSalary(salary);
             System.out.println("The employee with ID: " + id + ". Salary changed from " + oldSalary + " to " + foundEmployee.getSalary());
-            
         } catch (EmployeeNotFoundException e) {
             System.out.println("Couldn't find the employee with ID: " + id);
         }
@@ -214,9 +189,8 @@ public class EmployeeManagement {
 
     public static void searchByName() {
         System.out.println("What is the name of the employee?");
-        String inputName = sc.nextLine();
+        String inputName = Utilities.sc.nextLine();
         boolean foundName = false;
-
         for (Employee employee : employeeDB) {
             if (inputName.equalsIgnoreCase(employee.getName())) {
                 System.out.println(employee.toString());
@@ -231,8 +205,6 @@ public class EmployeeManagement {
     public static void searchByID() {
         System.out.println("What is the ID of the employee?");
         int id = Utilities.getIntegerInput();
-
-        // Anropar korrekt toString enligt polymorfism
         try {
             Employee foundEmployee = getEmployeeByID(id);
             System.out.println(foundEmployee.toString());
@@ -244,7 +216,6 @@ public class EmployeeManagement {
     public static void putToWork() {
         Random rnd = new Random(System.currentTimeMillis());
         int nTimes;
-
         for (Employee employee : employeeDB) {
             nTimes = rnd.nextInt(10) + 1;
             for (int i = 0; i < nTimes; i++) {
@@ -254,16 +225,15 @@ public class EmployeeManagement {
     }
 
     private static Employee getEmployeeByID(int id) throws EmployeeNotFoundException {
-        for (Employee emp : employeeDB) {
-            if (emp.getID() == id) {
-                return emp;
+        for (Employee employee : employeeDB) {
+            if (employee.getID() == id) {
+                return employee;
             }
         }
         throw new EmployeeNotFoundException();
     }
 
     public static void searchByRole() {
-
         ArrayList<Employee> localDB = new ArrayList<>();
         System.out.println("Which role do you want to find?");
         System.out.println("1. Bartender");
@@ -271,10 +241,7 @@ public class EmployeeManagement {
         System.out.println("3. HR rep");
         System.out.println("4. Manager");
         System.out.println("5. Waiter");
-
-        int choice = Utilities.getMenuInput(1, 5);
-
-        switch (choice) {
+        switch (Utilities.getMenuInput(1, 5)) {
             case 1:
                 for (Employee employee : employeeDB) {
                     if (employee instanceof Bartender) {
@@ -287,7 +254,6 @@ public class EmployeeManagement {
                     if (employee instanceof Chef) {
                         localDB.add(employee);
                     }
-
                 }
                 break;
             case 3:
@@ -295,7 +261,6 @@ public class EmployeeManagement {
                     if (employee instanceof HR) {
                         localDB.add(employee);
                     }
-
                 }
                 break;
             case 4:
@@ -303,7 +268,6 @@ public class EmployeeManagement {
                     if (employee instanceof Manager) {
                         localDB.add(employee);
                     }
-
                 }
                 break;
             case 5:
@@ -311,13 +275,11 @@ public class EmployeeManagement {
                     if (employee instanceof Waiter) {
                         localDB.add(employee);
                     }
-
                 }
                 break;
             default:
                 System.out.println("Unkown error");
         }
-
         if (!(localDB.isEmpty())) {
             for (Employee employee : localDB) {
                 System.out.println("\n" + employee);
@@ -325,7 +287,6 @@ public class EmployeeManagement {
         } else {
             System.out.println("\nNo such employees on staff.");
         }
-
     }
 
     public static void displayAverageWage() {
@@ -333,19 +294,17 @@ public class EmployeeManagement {
         for (Employee employee : employeeDB) {
             totalWage += employee.getSalary();
         }
-
         System.out.println("The average wage is: " + (int) (totalWage / employeeDB.size()) + ".");
     }
 
     public static void displayMaximumWage() {
-        Employee emp = employeeDB.get(0);
+        Employee temp = employeeDB.get(0);
         for (Employee employee : employeeDB) {
-            if (employee.getSalary() > emp.getSalary()) {
-                emp = employee;
+            if (employee.getSalary() > temp.getSalary()) {
+                temp = employee;
             }
         }
-
-        System.out.println("The maximum wage is: " + emp.getSalary() + " and belongs to " + emp.getName() + ".");
+        System.out.println("The maximum wage is: " + temp.getSalary() + " and belongs to " + temp.getName() + ".");
     }
 
     public static void displayMinimumWage() {
@@ -355,7 +314,6 @@ public class EmployeeManagement {
                 emp = employee;
             }
         }
-
         System.out.println("The minimum wage is: " + emp.getSalary() + " and belongs to " + emp.getName() + ".");
     }
 
@@ -364,7 +322,6 @@ public class EmployeeManagement {
         for (Employee employee : employeeDB) {
             totalBonus += employee.bonus();
         }
-
         System.out.println("The total bonus is: " + totalBonus);
     }
 
@@ -375,7 +332,6 @@ public class EmployeeManagement {
                 nrOfWomen++;
             }
         }
-
         System.out.println(
                 "The percentage of female employees is: " + (int) (nrOfWomen / employeeDB.size() * 100) + "%.");
     }
@@ -393,7 +349,6 @@ public class EmployeeManagement {
         double nrOfWaiterMen = 0;
 
         for (Employee employee : employeeDB) {
-
             if (employee instanceof Bartender) {
                 bartenderList.add((Bartender) employee);
                 if (employee.getGender() == GenderType.MALE) {
@@ -448,7 +403,6 @@ public class EmployeeManagement {
         for (Employee employee : employeeDB) {
             totalAge += employee.calculateAge();
         }
-
         System.out.println("The average age is: " + (int) (totalAge / employeeDB.size()));
     }
 
