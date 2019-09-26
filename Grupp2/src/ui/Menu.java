@@ -155,10 +155,10 @@ public class Menu {
     public static void runUpdateMenu() {
         boolean previous = false;
         while (!previous) {
-            System.out.println("\nEnter selection");
-            System.out.println("1. Update name of employee");
-            System.out.println("2. Update DOB of employee");
-            System.out.println("3. Update salary of employee");
+            System.out.println("\nUpdate...");
+            System.out.println("1. name of employee");
+            System.out.println("2. DOB of employee");
+            System.out.println("3. salary of employee");
             System.out.println("0. Return to previous menu");
             switch (Utilities.getMenuInput(0, 3)) {
                 case 0:
