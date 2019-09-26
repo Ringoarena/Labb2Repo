@@ -30,7 +30,7 @@ public class Utilities {
                 String input = sc.nextLine();
                 return Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.println("Ilegal input");
+                System.out.print("Ilegal input, enter an ID: ");
             }
         }
     }

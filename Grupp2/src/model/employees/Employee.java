@@ -70,18 +70,11 @@ public abstract class Employee {
         return Utilities.fixLengthString(ID,5) +
                 "  " + Utilities.fixLengthString(name,20) +
                 "  " + Utilities.fixLengthString(dob,15) +
-                "  " + Utilities.fixLengthString(salary,7) +
+                "  " + Utilities.fixLengthString((int)salary,7) +
                 "  " + Utilities.fixLengthString(gender, 7) + "  ";
 //        return Utilities.fixLength(""+ID, 3) + Utilities.fixLength(name, 10) + Utilities.fixLength(""+dob, 15)
 //         + Utilities.fixLength(""+salary, 10) + Utilities.fixLength(""+gender, 7);
     }
-
-//            System.out.println(Utilities.fixLengthString("ID", 5) +
-//                    "  " + Utilities.fixLengthString("Name", 20) +
-//                    "  " + Utilities.fixLengthString("Date of birth", 15) +
-//                    "  " + Utilities.fixLengthString("Salary", 7) +
-//                    "  " + Utilities.fixLengthString("Gender", 7) +
-//                    "  " + Utilities.fixLengthString("Unique variable", 15));
 
     public long calculateAge(){
         LocalDate now = LocalDate.now();

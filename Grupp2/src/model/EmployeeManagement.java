@@ -19,6 +19,10 @@ public class EmployeeManagement {
 
     private static ArrayList<Employee> employeeDB = new ArrayList<>();
 
+    public static ArrayList<Employee> getEmployeeDB() {
+        return employeeDB;
+    }
+
     public static void loadDB() {
         employeeDB.add(new Waiter("Rikard", LocalDate.of(1990, 9, 25), GenderType.MALE));
         employeeDB.add(new Waiter("Pelle", LocalDate.of(1992, 2, 12), GenderType.MALE));
@@ -41,6 +45,7 @@ public class EmployeeManagement {
         employeeDB.add(new HR("Gunnel", LocalDate.of(1962, 9, 25), GenderType.FEMALE));
         employeeDB.add(new HR("Berit", LocalDate.of(1965, 9, 25), GenderType.FEMALE));
         employeeDB.add(new HR("Sören", LocalDate.of(1968, 9, 25), GenderType.MALE));
+        System.out.println("\nLoading database...");
     }
 
     public static void addEmployee() {
@@ -49,11 +54,11 @@ public class EmployeeManagement {
         GenderType newEmployeeGender = null;
         Employee newEmployee = null;
 
-        System.out.println("Enter employee name");
+        System.out.print("\nEnter employee name ");
         name = Utilities.sc.nextLine();
         while (true) {
             try {
-                System.out.println("Enter DOB (yyyy-mm-dd)");
+                System.out.print("Enter DOB (yyyy-mm-dd) ");
                 String s = Utilities.sc.nextLine();
                 dob = LocalDate.parse(s);
                 break;
@@ -61,8 +66,7 @@ public class EmployeeManagement {
                 System.out.println("Illegal input!");
             }
         }
-
-        System.out.println("Enter employee gender");
+        System.out.println("\nEnter employee gender");
         System.out.println("1. Female");
         System.out.println("2. Male");
         System.out.println("3. Other");
@@ -80,8 +84,7 @@ public class EmployeeManagement {
                 System.out.println("Unknown error");
                 break;
         }
-
-        System.out.println("Enter employee role");
+        System.out.println("\nEnter employee role");
         System.out.println("1. Manager");
         System.out.println("2. HR");
         System.out.println("3. Chef");
@@ -107,72 +110,59 @@ public class EmployeeManagement {
                 System.out.println("Unknown error!");
         }
         employeeDB.add(newEmployee);
-        System.out.println("A new employee has been added: " + newEmployee.toString());
+        System.out.println("\nEmployee added: " + newEmployee.getName());
     }
 
     public static void displayAllEmployees() {
-        System.out.println();
-        System.out.println(Utilities.fixLengthString("ID", 5) +
-                "  " + Utilities.fixLengthString("Name", 20) +
-                "  " + Utilities.fixLengthString("Date of birth", 15) +
-                "  " + Utilities.fixLengthString("Salary", 7) +
-                "  " + Utilities.fixLengthString("Gender", 7) +
-                "  " + Utilities.fixLengthString("Unique variable", 15));
+        printHeader();
         for (Employee emp : employeeDB) {
             System.out.println(emp.toString());
         }
-
-//        System.out.print(Utilities.fixLength("ID", 3));
-//        System.out.print(Utilities.fixLength("Name", 10));
-//        System.out.print(Utilities.fixLength("Date of birth", 15));
-//        System.out.print(Utilities.fixLength("Salary", 10));
-//        System.out.print(Utilities.fixLength("Gender", 7));
-//        System.out.print(Utilities.fixLength("Unique attribute", 15));
     }
 
     public static void deleteEmployeeByID() {
         Employee temp;
 
-        System.out.println("What is the ID of the employee you wish to remove?");
+        System.out.print("\nEnter the ID of the employee: ");
         int id = Utilities.getIntegerInput();
         try {
             temp = getEmployeeByID(id);
             employeeDB.remove(temp);
-            System.out.println("Employee with id " + id + " was removed");
+            System.out.println("\nEmployee removed: "+temp.getName());
         } catch (EmployeeNotFoundException e) {
-            System.out.println("Couldn't find the employee with ID: " + id);
+            System.out.println("ID " + id + " not found");
         }
     }
 
     public static void updateNameByID() {
-        System.out.println("What is the ID of the employee?");
+        System.out.print("\nEnter the ID of the employee: ");
         int id = Utilities.getIntegerInput();
         try {
             Employee foundEmployee = getEmployeeByID(id);
             String oldName = foundEmployee.getName();
-            System.out.println("Enter new name: ");
+            System.out.print("Enter new name: ");
             String name = Utilities.sc.nextLine();
             foundEmployee.setName(name);
-            System.out.println("The employee with ID: " + id + ". Name changed from " + oldName + " to " + foundEmployee.getName());
+            System.out.println(oldName + " changed name to " + foundEmployee.getName());
         } catch (EmployeeNotFoundException e) {
-            System.out.println("Couldn't find the employee with ID: " + id);
+            System.out.println("ID " + id + " not found");
         }
     }
 
     public static void updateDobByID() {
-        System.out.println("What is the ID of the employee?");
+        System.out.print("\nEnter the ID of the employee: ");
         int id = Utilities.getIntegerInput();
         while (true) {
             try {
                 Employee foundEmployee = getEmployeeByID(id);
                 LocalDate oldDob = foundEmployee.getDob();
-                System.out.println("Enter new Date of birth: (yyyy-mm-dd): ");
+                System.out.print("Enter new Date of birth (yyyy-mm-dd): ");
                 String dob = Utilities.sc.nextLine();
                 foundEmployee.setDob(LocalDate.parse(dob));
-                System.out.println("The employee with ID: " + id + ". DOB changed from " + oldDob + " to " + foundEmployee.getDob());
+                System.out.println(foundEmployee.getName() + " changed DOB from " + oldDob + " to " + foundEmployee.getDob());
                 break;
             } catch (EmployeeNotFoundException e) {
-                System.out.println("Couldn't find the employee with ID: " + id);
+                System.out.println("ID " + id + " not found");
             } catch (DateTimeParseException e) {
                 System.out.println("Illegal dateformat!");
             }
@@ -180,43 +170,55 @@ public class EmployeeManagement {
     }
 
     public static void updateSalaryByID() {
-        System.out.println("What is the ID of the employee?");
+        System.out.print("\nEnter the ID of the employee: ");
         int id = Utilities.getIntegerInput();
         try {
             Employee foundEmployee = getEmployeeByID(id);
             double oldSalary = foundEmployee.getSalary();
-            System.out.println("Enter new salary: ");
+            System.out.print("Enter new salary: ");
             double salary = Double.parseDouble(Utilities.sc.nextLine());
             foundEmployee.setSalary(salary);
-            System.out.println("The employee with ID: " + id + ". Salary changed from " + oldSalary + " to " + foundEmployee.getSalary());
+            System.out.println(foundEmployee.getName() + " changed salary from " + (int)oldSalary + " to " + (int)foundEmployee.getSalary());
         } catch (EmployeeNotFoundException e) {
-            System.out.println("Couldn't find the employee with ID: " + id);
+            System.out.println("ID " + id + " not found");
         }
     }
 
     public static void searchByName() {
-        System.out.println("What is the name of the employee?");
+        System.out.print("\nEnter name: ");
         String inputName = Utilities.sc.nextLine();
         boolean foundName = false;
         for (Employee employee : employeeDB) {
             if (inputName.equalsIgnoreCase(employee.getName())) {
+                printHeader();
                 System.out.println(employee.toString());
                 foundName = true;
             }
         }
         if (!foundName) {
-            System.out.println("There are no employees with that name.");
+            System.out.println("Employee not found.");
         }
     }
 
+    private static void printHeader() {
+        System.out.println();
+        System.out.println(Utilities.fixLengthString("ID", 5) +
+                "  " + Utilities.fixLengthString("Name", 20) +
+                "  " + Utilities.fixLengthString("Date of birth", 15) +
+                "  " + Utilities.fixLengthString("Salary", 7) +
+                "  " + Utilities.fixLengthString("Gender", 7) +
+                "  " + Utilities.fixLengthString("Unique variable", 15));
+    }
+
     public static void searchByID() {
-        System.out.println("What is the ID of the employee?");
+        System.out.print("\nEnter the ID of the employee: ");
         int id = Utilities.getIntegerInput();
         try {
             Employee foundEmployee = getEmployeeByID(id);
+            printHeader();
             System.out.println(foundEmployee.toString());
         } catch (EmployeeNotFoundException e) {
-            System.out.println("Couldn't find the employee with ID: " + id);
+            System.out.println("ID " + id + " not found");
         }
     }
 
@@ -242,7 +244,7 @@ public class EmployeeManagement {
 
     public static void searchByRole() {
         ArrayList<Employee> localDB = new ArrayList<>();
-        System.out.println("Which role do you want to find?");
+        System.out.println("\nWhich role do you want to find?");
         System.out.println("1. Bartender");
         System.out.println("2. Chef");
         System.out.println("3. HR rep");
@@ -288,8 +290,9 @@ public class EmployeeManagement {
                 System.out.println("Unkown error");
         }
         if (!(localDB.isEmpty())) {
+            printHeader();
             for (Employee employee : localDB) {
-                System.out.println("\n" + employee);
+                System.out.println(employee);
             }
         } else {
             System.out.println("\nNo such employees on staff.");
