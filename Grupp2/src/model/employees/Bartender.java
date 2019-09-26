@@ -21,7 +21,7 @@ public class Bartender extends Employee {
 
     @Override
     public String toString(){
-        return super.toString() + Utilities.fixLength("Drinks served "+cocktailServed, 15) ;
+        return super.toString() + Utilities.fixLengthString("Drinks served "+cocktailServed, 15) ;
     }
 
 	@Override

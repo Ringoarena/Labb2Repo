@@ -25,7 +25,7 @@ public class HR extends Employee {
 
     @Override
     public String toString() {
-        return super.toString() + Utilities.fixLength("People recruited " + noOfPeopleRecruited, 20);
+        return super.toString() + Utilities.fixLengthString("People recruited " + noOfPeopleRecruited, 20);
     }
 
 

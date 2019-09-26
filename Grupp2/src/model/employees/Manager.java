@@ -22,7 +22,7 @@ public class Manager extends Employee {
 
     @Override
     public String toString(){
-        return super.toString() +  Utilities.fixLength("People fired "+noOfPeopleFired, 15) ;
+        return super.toString() +  Utilities.fixLengthString("People fired "+noOfPeopleFired, 15) ;
     }
     
 	@Override

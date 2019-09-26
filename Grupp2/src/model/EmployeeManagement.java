@@ -111,16 +111,23 @@ public class EmployeeManagement {
     }
 
     public static void displayAllEmployees() {
-        System.out.print(Utilities.fixLength("ID", 3));
-        System.out.print(Utilities.fixLength("Name", 10));
-        System.out.print(Utilities.fixLength("Date of birth", 15));
-        System.out.print(Utilities.fixLength("Salary", 10));
-        System.out.print(Utilities.fixLength("Gender", 7));
-        System.out.print(Utilities.fixLength("Unique attribute", 15));
         System.out.println();
+        System.out.println(Utilities.fixLengthString("ID", 5) +
+                "  " + Utilities.fixLengthString("Name", 20) +
+                "  " + Utilities.fixLengthString("Date of birth", 15) +
+                "  " + Utilities.fixLengthString("Salary", 7) +
+                "  " + Utilities.fixLengthString("Gender", 7) +
+                "  " + Utilities.fixLengthString("Unique variable", 15));
         for (Employee emp : employeeDB) {
             System.out.println(emp.toString());
         }
+
+//        System.out.print(Utilities.fixLength("ID", 3));
+//        System.out.print(Utilities.fixLength("Name", 10));
+//        System.out.print(Utilities.fixLength("Date of birth", 15));
+//        System.out.print(Utilities.fixLength("Salary", 10));
+//        System.out.print(Utilities.fixLength("Gender", 7));
+//        System.out.print(Utilities.fixLength("Unique attribute", 15));
     }
 
     public static void deleteEmployeeByID() {

@@ -1,5 +1,8 @@
 package ui;
 
+import model.employees.GenderType;
+
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Utilities {
@@ -30,6 +33,37 @@ public class Utilities {
                 System.out.println("Ilegal input");
             }
         }
+    }
+
+    public static String fixLengthString(String string, int length) {
+        if (string.length() >= length) {
+            return string.substring(0, length);
+        } else {
+            while (string.length() < length) {
+                string += " ";
+            }
+            return string;
+        }
+    }
+
+    public static String fixLengthString(int integer, int length) {
+        String string = String.valueOf(integer);
+        return fixLengthString(string, length);
+    }
+
+    public static String fixLengthString(double d, int length) {
+        String string = String.valueOf(d);
+        return fixLengthString(string, length);
+    }
+
+    public static String fixLengthString(LocalDate localDate, int length) {
+        String string = String.valueOf(localDate);
+        return fixLengthString(string, length);
+    }
+
+    public static String fixLengthString(GenderType genderType, int length) {
+        String string = String.valueOf(genderType);
+        return fixLengthString(string, length);
     }
 
     public static String fixLength(String s, int l) {

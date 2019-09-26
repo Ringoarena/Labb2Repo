@@ -24,7 +24,7 @@ public class Chef extends Employee{
 
     @Override
     public String toString(){
-        return super.toString() + Utilities.fixLength("No of drinks "+noOfDrinksDuringWork, 15) ;
+        return super.toString() + Utilities.fixLengthString("No of drinks "+noOfDrinksDuringWork, 15) ;
     }
 
 	@Override
