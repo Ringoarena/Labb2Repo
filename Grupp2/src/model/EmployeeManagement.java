@@ -204,7 +204,8 @@ public class EmployeeManagement {
         System.out.println();
         System.out.println(Utilities.fixLengthString("ID", 5) +
                 "  " + Utilities.fixLengthString("Name", 20) +
-                "  " + Utilities.fixLengthString("Date of birth", 15) +
+                "  " + Utilities.fixLengthString("Date of birth", 13) +
+                "  " + Utilities.fixLengthString("Age", 3) +
                 "  " + Utilities.fixLengthString("Salary", 7) +
                 "  " + Utilities.fixLengthString("Gender", 7) +
                 "  " + Utilities.fixLengthString("Unique variable", 15));

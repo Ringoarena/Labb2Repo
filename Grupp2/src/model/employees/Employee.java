@@ -69,7 +69,8 @@ public abstract class Employee {
     public String toString() {
         return Utilities.fixLengthString(ID,5) +
                 "  " + Utilities.fixLengthString(name,20) +
-                "  " + Utilities.fixLengthString(dob,15) +
+                "  " + Utilities.fixLengthString(dob,13) +
+                "  " + Utilities.fixLengthString(calculateAge(),3) +
                 "  " + Utilities.fixLengthString((int)salary,7) +
                 "  " + Utilities.fixLengthString(gender, 7) + "  ";
 //        return Utilities.fixLength(""+ID, 3) + Utilities.fixLength(name, 10) + Utilities.fixLength(""+dob, 15)

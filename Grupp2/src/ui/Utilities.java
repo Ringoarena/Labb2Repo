@@ -51,8 +51,8 @@ public class Utilities {
         return fixLengthString(string, length);
     }
 
-    public static String fixLengthString(double d, int length) {
-        String string = String.valueOf(d);
+    public static String fixLengthString(long l, int length) {
+        String string = String.valueOf(l);
         return fixLengthString(string, length);
     }
 
