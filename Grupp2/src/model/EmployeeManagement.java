@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Random;
-
 import model.employees.Bartender;
 import model.employees.Chef;
 import model.employees.Employee;

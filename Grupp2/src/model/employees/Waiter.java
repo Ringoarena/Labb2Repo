@@ -2,7 +2,6 @@ package model.employees;
 
 import java.time.LocalDate;
 import java.util.Random;
-
 import ui.Utilities;
 
 public class Waiter extends Employee {

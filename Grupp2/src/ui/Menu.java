@@ -2,7 +2,6 @@ package ui;
 
 import model.EmployeeManagement;
 import model.employees.Employee;
-
 import java.util.Comparator;
 
 public class Menu {

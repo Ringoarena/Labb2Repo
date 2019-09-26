@@ -1,7 +1,6 @@
 package ui;
 
 import model.employees.GenderType;
-
 import java.time.LocalDate;
 import java.util.Scanner;
 
