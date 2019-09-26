@@ -152,7 +152,7 @@ public class Menu {
         }
     }
 
-    public static void runUpdateMenu() {
+    private static void runUpdateMenu() {
         boolean previous = false;
         while (!previous) {
             System.out.println("\nUpdate...");
