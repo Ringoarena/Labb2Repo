@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import ui.Utilities;
 import static java.time.temporal.ChronoUnit.*;
 
-public abstract class Employee {
+public abstract class Employee implements Comparable<Employee>{
 
     private String name;
     private LocalDate dob;
-    private int ID;
+    private Integer ID;
     private double salary;
     private GenderType gender;
     double bonus;
@@ -22,6 +22,11 @@ public abstract class Employee {
         this.ID = ++IDGenerator;
     }
 
+    @Override
+    public int compareTo(Employee employee) {
+        return this.getID().compareTo(employee.getID());
+    }
+
     public abstract double bonus();
 
     public abstract void performDuties();
@@ -33,7 +38,7 @@ public abstract class Employee {
     public void setName(String input) {
         input = input.trim();
         input = input.substring(0, 1).toUpperCase() + input.substring(1);
-        for (int i = 0; i < input.length()-1; i++) {
+        for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == ' ') {
                 input = input.substring(0, i + 1) + input.substring(i + 1, i + 2).toUpperCase() + input.substring(i + 2);
             }
@@ -49,7 +54,7 @@ public abstract class Employee {
         this.dob = dob;
     }
 
-    public int getID() {
+    public Integer getID() {
         return ID;
     }
 

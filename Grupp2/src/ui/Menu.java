@@ -2,6 +2,8 @@ package ui;
 
 import model.EmployeeManagement;
 import model.employees.Employee;
+
+import java.util.Collections;
 import java.util.Comparator;
 
 public class Menu {
@@ -13,6 +15,7 @@ public class Menu {
             System.out.println("1. Management");
             System.out.println("2. Statistics");
             System.out.println("3. Load database");
+            System.out.println("4. Load database");
             System.out.println("0. Exit");
             switch (Utilities.getMenuInput(0, 3)) {
                 case 0:
@@ -81,8 +84,9 @@ public class Menu {
             System.out.println("1. Alphabetical order");
             System.out.println("2. Salary, ascending");
             System.out.println("3. Salary, descending");
+            System.out.println("4. ID, ascending");
             System.out.println("0. Return to previous menu");
-            switch (Utilities.getMenuInput(0, 3)) {
+            switch (Utilities.getMenuInput(0, 4)) {
                 case 0:
                     System.out.println("\nReturning to previous menu...");
                     previous = true;
@@ -100,6 +104,10 @@ public class Menu {
                 case 3:
                     Comparator<Employee> descending = (e1, e2) -> (int) (e2.getSalary()-e1.getSalary());
                     EmployeeManagement.getEmployeeDB().sort(descending);
+                    EmployeeManagement.displayAllEmployees();
+                    break;
+                case 4:
+                    Collections.sort(EmployeeManagement.getEmployeeDB());
                     EmployeeManagement.displayAllEmployees();
                     break;
                 default:
