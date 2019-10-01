@@ -15,7 +15,6 @@ public class Menu {
             System.out.println("1. Management");
             System.out.println("2. Statistics");
             System.out.println("3. Load database");
-            System.out.println("4. Load database");
             System.out.println("0. Exit");
             switch (Utilities.getMenuInput(0, 3)) {
                 case 0:

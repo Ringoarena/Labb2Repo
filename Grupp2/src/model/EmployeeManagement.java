@@ -149,9 +149,8 @@ public class EmployeeManagement {
     }
 
     public static void updateDobByID() {
-        System.out.print("\nEnter the ID of the employee: ");
-        int id = Utilities.getIntegerInput();
-        while (true) {
+            System.out.print("\nEnter the ID of the employee: ");
+            int id = Utilities.getIntegerInput();
             try {
                 Employee foundEmployee = getEmployeeByID(id);
                 LocalDate oldDob = foundEmployee.getDob();
@@ -159,13 +158,11 @@ public class EmployeeManagement {
                 String dob = Utilities.sc.nextLine();
                 foundEmployee.setDob(LocalDate.parse(dob));
                 System.out.println(foundEmployee.getName() + " changed DOB from " + oldDob + " to " + foundEmployee.getDob());
-                break;
             } catch (EmployeeNotFoundException e) {
                 System.out.println("ID " + id + " not found");
             } catch (DateTimeParseException e) {
                 System.out.println("Illegal dateformat!");
             }
-        }
     }
 
     public static void updateSalaryByID() {
